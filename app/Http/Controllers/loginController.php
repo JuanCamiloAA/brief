@@ -35,7 +35,11 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        // Digest authentication...
+        $response = Http::withBasicAuth($input["email"], $input["pass"])->post('https://10.170.20.95:50000/b1s/v1/Login');
+
+        $response = Http::withToken('token')->post('https://10.170.20.95:50000/b1s/v1/Login');
     }
 
     /**
