@@ -26,8 +26,22 @@ class formBrief extends FormRequest
         return [
             'Solicitante'=>['required'],
             'Laboratorio'=>['required'],
-            'Solicitante'=>['required'],
-            'Solicitante'=>['required'],
+            'SlpName'=>['required'],
+            'VigIni'=>['required'],
+            'VigFin'=>['required'],
+            'VigPag'=>['required'],
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'Solicitante'=>'Solicitante',
+            'Laboratorio'=>'Laboratorio',
+            'SlpName'=>'Vendedor',
+            'VigIni'=>'Fecha Inicio',
+            'VigFin'=>'Fecha final',
+            'VigPag'=>'Fecha de pago',
         ];
     }
 }

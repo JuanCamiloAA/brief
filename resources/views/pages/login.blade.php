@@ -45,7 +45,7 @@
     </head>
     <body class="">
         <div class="relative flex items-top justify-center min-h-screen  bg-dark sm:items-start py-4 sm:pt-0">
-            <div class="container-fluid">     
+            <div class="container-fluid mt-5">     
                 <div class="row justify-center mt-5">
                     <div class="col-8">
                         <div class="row bg-light rounded p-4">

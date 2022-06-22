@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\formBrief;
 use Illuminate\Http\Request;
 use App\Models\BRIEF;
 
@@ -34,10 +35,11 @@ class BriefController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(formBrief $request)
     {
-            // $input=$request->all();
+            $input=$request->all();
             BRIEF::create($request->all());
+            dd($input);
             
             return Redirect()->route('brief.index');
             
@@ -69,7 +71,8 @@ class BriefController extends Controller
      */
     public function show($id)
     {
-        //
+        $brief = BRIEF::find($id);
+        return view('pages.detalleBrief', compact('brief'));
     }
 
     /**
@@ -80,7 +83,8 @@ class BriefController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brief = BRIEF::find($id);
+        return view('pages.Editar', compact('brief'));
     }
 
     /**
@@ -92,7 +96,14 @@ class BriefController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $input = $request->all();
+
+        $brief = BRIEF::find($id);
+
+        $brief->update($input);
+        
+        return Redirect()->route('brief.index');
     }
 
     /**

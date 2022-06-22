@@ -23,6 +23,7 @@
                         <th>Solicitante</th>
                         <th>COD Articulo</th>
                         <th>Fecha Fin</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,10 @@
                         <td>{{$brief->Solicitante}}</td>
                         <td>{{$brief->CodArticulo}}</td>
                         <td>{{$brief->VigFin}}</td>
+                        <td class="d-flex justify-content-around">
+                        <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a>
+                        <a href="{{route('brief.show', $brief->Brief)}}"><i class="text-info fas fa-info-circle"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
