@@ -21,7 +21,7 @@
                     <tr> 
                         <th>N° BRIEF</th>
                         <th>Solicitante</th>
-                        <th>COD Articulo</th>
+                        <th>Articulo</th>
                         <th>Fecha Fin</th>
                         <th>Acciones</th>
                     </tr>
