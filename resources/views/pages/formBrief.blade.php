@@ -1,12 +1,14 @@
 @extends('welcome')
 
+@section('tittle','Crear BRIEF')
+
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-md-10 col-12 bg-light opacity-80 rounded p-4">
+    <div class="col-md-10 col-12 op rounded px-4">
         <div class="row">
             <div class="col text-center">
-                <h2 class="coloresCorp">Crear Brief.</h2>
+                <h1 class="coloresCorp">Crear Brief.</h1>
             </div>
         </div>
         <form action="{{route('brief.store')}}" method="POST">
@@ -16,9 +18,7 @@
                     <div class="form-floating mb-3">
                         <select class="form-select selector  @error('Solicitante') is-invalid @enderror" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
                             <option value="" readonly selected>Solicitante</option>
-                            <option value="Carlos">Carlos</option>
-                            <option value="Maria">Maria</option>
-                            <option value="pepito">pepito</option>
+                            <option value="{{$retorno['CardName']}}">{{$retorno['CardName']}}</option>
                         </select>
                         @error('Solicitante')
                         <span class="invalid-feedback" role="alert">
@@ -155,7 +155,7 @@
             </div>
             <div class="row d-flex justify-content-end">
                 <div class="col-4 d-grid gap-2">
-                    <button type="submit" class="btn fondo-btn text-white">Crear</button>
+                    <button type="submit" class="btn btn-dark text-white">Crear</button>
                 </div>
                 <div class="col-2">
                     <a href="{{route('brief.index')}}" class="d-grid gap-2">
@@ -173,6 +173,9 @@
     .coloresCorp{
         color: #0F6004;
         font-weight: 900;
+    }
+    .op{
+        background-color: rgba(252, 252, 252, 0.8);
     }
 </style>
 @endsection

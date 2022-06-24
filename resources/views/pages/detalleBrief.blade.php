@@ -1,9 +1,10 @@
 @extends('welcome')
 
+@section('tittle','Detalle BRIEF')
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-md-10 col-12 bg-light opacity-80 rounded p-4">
+    <div class="col-md-10 col-12 op rounded p-4">
         <div class="row">
             <div class="col text-center">
                 <h2 class="coloresCorp">Detalle Brief.</h2>

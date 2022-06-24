@@ -24,7 +24,18 @@ class loginController extends Controller
      */
     public function create()
     {
-        //
+        
+        $response = Http::post('https://10.170.20.95:50000/b1s/v1/Login',[
+            'CompanyDB' => 'INVERSIONES0804',
+            'UserName' => 'Prueba',
+            'Password' => '1234',
+        ])->json();
+
+        setcookie("B1SESSION",$response['SessionId'], time() + 84600);
+
+        session_start();
+        $_SESSION['B1SESSION'] = $response['SessionId'];
+        return Redirect()->route('brief.index');
     }
 
     /**
@@ -35,14 +46,14 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        session_start();
+        $response = Http::post('https://10.170.20.95:50000/b1s/v1/Logout')->json();
         
-        $response = Http::withDigestAuth( 'Ecommerce', '1m3lSlp4w9')->post('https://10.170.20.95:50000/b1s/v1/Login');;
-       
-        $response = Http::withToken('token')->post('https://10.170.20.95:50000/b1s/v1/Login');
-        
-        return Redirect()->route('brief.index');
+        setcookie("B1SESSION",'', time() - 84600);
+        $_SESSION['B1SESSION'] = "";
+        dd($response);
     }
+
 
     /**
      * Display the specified resource.

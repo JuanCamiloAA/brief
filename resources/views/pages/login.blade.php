@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>BRIEF IvanAgro</title>
+        <title>Login IvanAgro</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -37,6 +37,9 @@
                 color: #0F6004;
                 font-weight: 900;
             }
+            .op{
+                background-color: rgba(50, 49, 49 ,0.6);
+            }
             
         </style>
 
@@ -47,35 +50,24 @@
         </style>
     </head>
     <body class="">
-        <div class="relative flex items-top justify-center min-h-screen  fondogeneral sm:items-start py-4 sm:pt-0">
-            <div class="container-fluid mt-5">     
-                <div class="row justify-center align-items-center">
+        <div class="relative flex items-top justify-center min-h-screen  fondogeneral sm:items-start py-4 pt-5 sm:pt-0">
+            <div class="container-fluid mt-5 pt-5">     
+                <div class="row justify-center align-items-center mt-5">
                     <div class="col-6">
-                        <div class="row bg-dark rounded p-4">
+                        <div class="row op rounded p-4">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-12 text-center">
-                                        <h2 class="coloresCorp">Crear Brief.</h2>
+                                    <div class="col-12 text-center pb-5">
+                                        <h1 class=""><img src="../img/Logo.png" alt="" width="250rem"></h1>
                                     </div>
                                 </div>
-                                <form action="{{route('login.store')}}" method="post">
-                                @csrf
-                                    <div class="row px-3">
-                                        <div class="form-floating h-0 mb-3 px-0">
-                                            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
-                                            <label for="floatingInput">Usuario</label>
-                                        </div>
-                                        <div class="form-floating h-0 mb-3 px-0">
-                                            <input type="password" class="form-control" id="floatingPassword" name="pass" placeholder="Password">
-                                            <label for="floatingPassword">Contraseña</label>
-                                        </div>
-                                        <div class="col-12 py-2 text-center">
-                                            <!-- <a href="{{route('brief.index')}}" > -->
-                                                <button class="btn btn-primary" type="submit">Iniciar sesión</button>
-                                            <!-- </a> -->
+                                    <div class="row justify-content-center">
+                                        <div class="col-6 py-2 d-grid grap-2 text-center">
+                                            <a href="{{route('login.create')}}" class="btn btn-primary" >
+                                                Iniciar sesión
+                                            </a>
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>

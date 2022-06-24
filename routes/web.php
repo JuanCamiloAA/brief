@@ -23,3 +23,6 @@ Route::resources([
     'login' => loginController::class,
     'brief' => BriefController::class,
 ]);
+
+
+// Route::get('/logout',[loginController::class,'create'])->name('logout');

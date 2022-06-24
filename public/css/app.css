@@ -1,13 +1,12 @@
 
-body {
-    font-family: 'Nunito', sans-serif;
-}
+
 .fondo{
     background-image: url("../img/sidebar.png");
     /* background: url("../img/sidebar.png"); */
 } 
 body{
     font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
 }
 .fondogeneral{
     background-image: url("../img/fondologin.jpg");

@@ -1,5 +1,7 @@
 @extends('welcome')
 
+@section('tittle','BRIEF´S')
+
 @section('content')
 
 <div class="row">
@@ -12,7 +14,7 @@
         </a>
     </div>
 </div>
-<div class="row  bg-light rounded p-4 mt-3">
+<div class="row op rounded p-4 mt-3">
     
     <div class="col-12 mt-2">
         <div class="table-responsive">
@@ -34,15 +36,19 @@
                         <td>{{$brief->CodArticulo}}</td>
                         <td>{{$brief->VigFin}}</td>
                         <td class="d-flex justify-content-around">
-                        <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a>
+                        <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->
                         <a href="{{route('brief.show', $brief->Brief)}}"><i class="text-info fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 @endforeach
+
                 </tbody>
             </table>
         </div>
     </div>
+    <!-- <div class="col">
+        <p></p>
+    </div> -->
 </div>
 @endsection
 

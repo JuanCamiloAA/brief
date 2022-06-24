@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\formBrief;
 use Illuminate\Http\Request;
 use App\Models\BRIEF;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client;
 
 class BriefController extends Controller
 {
@@ -16,6 +18,8 @@ class BriefController extends Controller
     public function index()
     {
         $brief = BRIEF::all();
+  
+
         return view('pages.brief', compact('brief'));
     }
 
@@ -26,7 +30,14 @@ class BriefController extends Controller
      */
     public function create()
     {
-        return view('pages.formBrief');
+        
+        session_start();
+        
+        do {
+            $retorno = Http::withToken($_SESSION['B1SESSION'])->get('https://10.170.20.95:50000/b1s/v1/IncomingPayments(74301)');
+        } while ($retorno->clientError());
+        $retorno = $retorno->json();
+        return view('pages.formBrief',compact('retorno'));
     }
 
     /**
@@ -39,7 +50,6 @@ class BriefController extends Controller
     {
             $input=$request->all();
             BRIEF::create($request->all());
-            dd($input);
             
             return Redirect()->route('brief.index');
             
@@ -84,7 +94,7 @@ class BriefController extends Controller
     public function edit($id)
     {
         $brief = BRIEF::find($id);
-        return view('pages.Editar', compact('brief'));
+        return view('pages.EditBrief', compact('brief'));
     }
 
     /**

@@ -1,9 +1,11 @@
 @extends('welcome')
 
+@section('tittle','Editar BRIEF')
+
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-md-10 col-12 bg-light opacity-80 rounded p-4">
+    <div class="col-md-10 col-12 op opacity-80 rounded p-4">
         <div class="row">
             <div class="col text-center">
                 <h2 class="coloresCorp">Editar Brief.</h2>
@@ -126,7 +128,7 @@
             </div>
             <div class="row d-flex justify-content-end">
                 <div class="col-4 d-grid gap-2">
-                    <button type="submit" class="btn fondo-btn text-white">Editar</button>
+                    <button type="submit" class="btn btn-dark text-white">Editar</button>
                 </div>
                 <div class="col-2">
                     <a href="{{route('brief.index')}}" class="d-grid gap-2">
@@ -138,12 +140,30 @@
     </div>
 </div>
 @endsection
-
 @section('css')
 <style>
     .coloresCorp{
         color: #0F6004;
         font-weight: 900;
+    }
+    .fondo{
+    background-image: url("../img/sidebar.png");
+    /* background: url("../img/sidebar.png"); */
+    } 
+    body{
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .fondogeneral{
+        background-image: url("../img/fondologin.jpg");
+    }
+    .fondo-btn{
+        background:#115100;
+    }
+    .fondo-btn:hover{
+        background: #218F18;
+    }
+    .op{
+        background-color: rgba(252, 252, 252, 0.8);
     }
 </style>
 @endsection
