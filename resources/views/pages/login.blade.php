@@ -38,7 +38,7 @@
                 font-weight: 900;
             }
             .op{
-                background-color: rgba(50, 49, 49 ,0.6);
+                background-color: rgba(50, 49, 49 ,0.2);
             }
             
         </style>
@@ -58,11 +58,11 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-12 text-center pb-5">
-                                        <h1 class=""><img src="../img/Logo.png" alt="" width="250rem"></h1>
+                                        <h1 class=""><img src="../img/LogoIvanagro.png" alt="" width="250rem"></h1>
                                     </div>
                                 </div>
                                     <div class="row justify-content-center">
-                                        <div class="col-6 py-2 d-grid grap-2 text-center">
+                                        <div class="col-6 py-2 pb-5 d-grid grap-2 text-center">
                                             <a href="{{route('login.create')}}" class="btn btn-primary" >
                                                 Iniciar sesión
                                             </a>

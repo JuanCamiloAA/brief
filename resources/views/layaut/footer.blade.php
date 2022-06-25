@@ -7,7 +7,7 @@
         </div>
     </div>
 </footer> -->
-<footer class="main-footer h-16 px-4 pt-4 align-items-center">
+<footer class=" op_foot h-16 px-4 pt-4 align-items-center">
         <div class="row">
             <div class="col">
                 <strong id="copy">Copyright © IvanAgro. </strong>

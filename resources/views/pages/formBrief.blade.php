@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="row justify-content-center">
+<div class="row justify-content-center py-4">
     <div class="col-md-10 col-12 op rounded px-4">
         <div class="row">
             <div class="col text-center">
@@ -18,7 +18,6 @@
                     <div class="form-floating mb-3">
                         <select class="form-select selector  @error('Solicitante') is-invalid @enderror" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
                             <option value="" readonly selected>Solicitante</option>
-                            <option value="{{$retorno['CardName']}}">{{$retorno['CardName']}}</option>
                         </select>
                         @error('Solicitante')
                         <span class="invalid-feedback" role="alert">
@@ -60,8 +59,9 @@
                     <div class="form-floating mb-3">
                         <select class="form-select selector" name="CodArticulo" id="cod-articulo" aria-label="Floating label select example">
                             <option value="" readonly selected>Articulo</option>
-                            <option value="crema">crema</option>
-                            <option value="pesticida">pesticida</option>
+                            @foreach($retorno as $num => $art)
+                            <option value="{{}}">{{}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-flex justify-content-end">
+            <div class="row d-flex justify-content-end mb-5">
                 <div class="col-4 d-grid gap-2">
                     <button type="submit" class="btn btn-dark text-white">Crear</button>
                 </div>
@@ -173,10 +173,12 @@
     .coloresCorp{
         color: #0F6004;
         font-weight: 900;
+        opacity: 0.7;
     }
     .op{
-        background-color: rgba(252, 252, 252, 0.8);
+        background-color:  rgba(50, 49, 49 ,0.2);
     }
+
 </style>
 @endsection
 

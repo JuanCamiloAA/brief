@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mt-3">
     <div class="col-12">
         <a href="{{route('brief.create')}}">
             <button type="button" class="btn btn-primary" >
@@ -14,11 +14,11 @@
         </a>
     </div>
 </div>
-<div class="row op rounded p-4 mt-3">
+<div class="row op_foot rounded p-4 mt-3">
     
     <div class="col-12 mt-2">
         <div class="table-responsive">
-            <table id="dt" style="width: 100%;" class="table table-striped table-hover nowrap">
+            <table id="dt" style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
                 <thead>
                     <tr> 
                         <th>N° BRIEF</th>
@@ -54,6 +54,24 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<style>
+    .dataTables_wrapper{
+        color: #212529!important;
+        font-weight: bold!important;
+    }
+    div.dataTables_wrapper div.dataTables_length label, div.dataTables_filter label {
+        font-weight: bold!important;
+    }
+    
+    div.dataTables_wrapper div.dataTables_length label select, div.dataTables_filter label input{
+        color: white!important;
+        background: #212529!important;
+    }
+    .paginate_button a{
+        color: white !important;
+        background-color: #212529!important;
+    }
+</style>
 @endsection
 
 @section('script')
@@ -65,7 +83,11 @@
             {
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-                }
+                },
+                
+                    button: {
+                        className: 'btn btn-outline-info mr-2' //Primary class for all buttons
+                    }
             }
             );
         });

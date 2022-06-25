@@ -31,7 +31,7 @@ class loginController extends Controller
             'Password' => '1234',
         ])->json();
 
-        setcookie("B1SESSION",$response['SessionId'], time() + 84600);
+        // setcookie("B1SESSION",$response['SessionId'], time() - 84600);
 
         session_start();
         $_SESSION['B1SESSION'] = $response['SessionId'];
@@ -49,7 +49,7 @@ class loginController extends Controller
         session_start();
         $response = Http::post('https://10.170.20.95:50000/b1s/v1/Logout')->json();
         
-        setcookie("B1SESSION",'', time() - 84600);
+        // setcookie("B1SESSION",'', time() - 84600);
         $_SESSION['B1SESSION'] = "";
         dd($response);
     }

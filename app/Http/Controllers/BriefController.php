@@ -34,9 +34,10 @@ class BriefController extends Controller
         session_start();
         
         do {
-            $retorno = Http::withToken($_SESSION['B1SESSION'])->get('https://10.170.20.95:50000/b1s/v1/IncomingPayments(74301)');
+            $retorno = Http::withToken($_SESSION['B1SESSION'])->get('https://10.170.20.95:50000/b1s/v1/Items?$select=ItemCode,ItemName,ForeignName,SupplierCatalogNo,ItemsGroupCode,Mainsupplier');
         } while ($retorno->clientError());
         $retorno = $retorno->json();
+        // dd($retorno['value']['0']['ItemName']);
         return view('pages.formBrief',compact('retorno'));
     }
 
