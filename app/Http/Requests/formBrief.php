@@ -25,11 +25,10 @@ class formBrief extends FormRequest
     {
         return [
             'Solicitante'=>['required'],
-            'Laboratorio'=>['required'],
-            'SlpName'=>['required'],
             'VigIni'=>['required'],
             'VigFin'=>['required'],
             'VigPag'=>['required'],
+            'Pres'=>['required'],
         ];
     }
     
@@ -37,11 +36,10 @@ class formBrief extends FormRequest
     {
         return [
             'Solicitante'=>'Solicitante',
-            'Laboratorio'=>'Laboratorio',
-            'SlpName'=>'Vendedor',
             'VigIni'=>'Fecha Inicio',
             'VigFin'=>'Fecha final',
             'VigPag'=>'Fecha de pago',
+            'Pres'=>'Presupuesto'
         ];
     }
 }

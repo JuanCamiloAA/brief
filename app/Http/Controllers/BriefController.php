@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\formBrief;
 use Illuminate\Http\Request;
 use App\Models\BRIEF;
+use App\Models\detalle_breif;
+use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client;
 
@@ -37,8 +39,9 @@ class BriefController extends Controller
             $retorno = Http::withToken($_SESSION['B1SESSION'])->get('https://10.170.20.95:50000/b1s/v1/Items?$select=ItemCode,ItemName,ForeignName,SupplierCatalogNo,ItemsGroupCode,Mainsupplier');
         } while ($retorno->clientError());
         $retorno = $retorno->json();
-        // dd($retorno['value']['0']['ItemName']);
-        return view('pages.formBrief',compact('retorno'));
+        // dd($retorno['value']);
+        $articulos = $retorno['value'];
+        return view('pages.formBrief',compact('articulos'));
     }
 
     /**
@@ -50,16 +53,38 @@ class BriefController extends Controller
     public function store(formBrief $request)
     {
             $input=$request->all();
-            BRIEF::create($request->all());
+
+            // dd($input);
+
+            DB::beginTransaction();
+
+            $breif = BRIEF::create([
+                "Solicitante" => $input["Solicitante"],
+                "VigIni" => $input["VigIni"],
+                "VigFin" => $input["VigFin"],
+                "VigPag" => $input["VigPag"],
+                "ObjGen" => $input["ObjGen"],
+                "ObjEsp" => $input["ObjEsp"],
+                "Cond" => $input["Cond"],
+                "ForPagVe" => $input["ForPagVe"],
+                "ForPagLab" => $input["ForPagLab"],
+                "Pres" => $input["Pres"],
+            ]);
+
             
+            foreach($input["vendedor_id"] as $key => $value){
+                
+                detalle_breif::create([
+                    "Brief_id" => $breif->Brief,
+                    "vendedor_id" => $value,
+                    "articulo_id"=>$input["articulo_id"][$key],
+                    "Meta"=>$input["Meta"][$key],
+                ]);
+            }
+            DB::commit();
             return Redirect()->route('brief.index');
-            
             // BRIEF::create([
             //     "Solicitante" => $input["Solicitante"],
-            //     "Laboratorio" => $input["Laboratorio"],
-            //     "CodArticulo" => $input["CodArticulo"],
-            //     "ItemName" => $input["ItemName"],
-            //     "SlpName" => $input["SlpName"],
             //     "VigIni" => $input["VigIni"],
             //     "VigFin" => $input["VigFin"],
             //     "VigPag" => $input["VigPag"],
@@ -69,7 +94,7 @@ class BriefController extends Controller
             //     "ForPagVe" => $input["ForPagVe"],
             //     "ForPagLab" => $input["ForPagLab"],
             //     "Pres" => $input["Pres"],
-            //     "Meta" => $input["Meta"], 
+            //     "Area" => $input["Meta"], 
             // ]);
             // return Redirect()->route('brief.index');
     }
@@ -83,7 +108,19 @@ class BriefController extends Controller
     public function show($id)
     {
         $brief = BRIEF::find($id);
-        return view('pages.detalleBrief', compact('brief'));
+        $detalle_brief = detalle_breif::select("TABLE_BRIEF.*", "detalle_brief.*")->join("TABLE_BRIEF", "TABLE_BRIEF.Brief", "=", "detalle_brief.Brief_id")
+        ->where("detalle_brief.Brief_id", $id)
+        ->get();
+        
+        session_start();
+        
+        do {
+            $retorno = Http::withToken($_SESSION['B1SESSION'])->get('https://10.170.20.95:50000/b1s/v1/Items?$select=ItemCode,ItemName,ForeignName,SupplierCatalogNo,ItemsGroupCode,Mainsupplier');
+        } while ($retorno->clientError());
+        $retorno = $retorno->json();
+        // dd($retorno['value']);
+        $articulos = $retorno['value'];
+        return view('pages.detalleBrief', compact('brief', 'detalle_brief', 'articulos'));
     }
 
     /**

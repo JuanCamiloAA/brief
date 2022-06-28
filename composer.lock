@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8b2b9ed1989d018d4fb8fa8775a18a3",
+    "content-hash": "34ae3987c04c7182cf145efba711716d",
     "packages": [
         {
             "name": "brick/math",
@@ -65,6 +65,49 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "citco/carbon",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/citco/carbon.git",
+                "reference": "95d60ab38f6d4eeb259f0518ecd42c9f1c01e665"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/citco/carbon/zipball/95d60ab38f6d4eeb259f0518ecd42c9f1c01e665",
+                "reference": "95d60ab38f6d4eeb259f0518ecd42c9f1c01e665",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "2.*",
+                "php": ">=7.1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Citco\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This is a wrapper for nesbot/carbon which also calculates which days are British bank holidays (England & Wales only).",
+            "keywords": [
+                "Bank",
+                "british",
+                "england",
+                "holiday",
+                "holidays",
+                "wales"
+            ],
+            "support": {
+                "issues": "https://github.com/citco/carbon/issues",
+                "source": "https://github.com/citco/carbon/tree/2.0.2"
+            },
+            "time": "2020-11-12T14:14:31+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

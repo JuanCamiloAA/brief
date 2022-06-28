@@ -23,8 +23,9 @@
                     <tr> 
                         <th>N° BRIEF</th>
                         <th>Solicitante</th>
-                        <th>Articulo</th>
+                        <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
+                        <th>Fecha Pago</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -33,7 +34,8 @@
                     <tr>
                         <td>{{$brief->Brief}}</td>
                         <td>{{$brief->Solicitante}}</td>
-                        <td>{{$brief->CodArticulo}}</td>
+                        <td>{{$brief->VigIni}}</td>
+                        <td>{{$brief->VigFin}}</td>
                         <td>{{$brief->VigFin}}</td>
                         <td class="d-flex justify-content-around">
                         <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->

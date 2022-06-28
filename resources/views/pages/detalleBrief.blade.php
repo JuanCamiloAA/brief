@@ -4,14 +4,14 @@
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-md-10 col-12 op rounded p-4">
+    <div class="col-md-5 col-12 op_foot rounded">
         <div class="row">
             <div class="col text-center">
                 <h2 class="coloresCorp">Detalle Brief.</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 p-3">
+            <div class="col-md-6 p-3">
                 <h4><b>Solicitante:</b></h4>
                 <span>
                     @if(isset($brief->Solicitante))
@@ -21,7 +21,67 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-4 p-3">
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha inicial:</b></h4>
+                <span>
+                    @if(isset($brief->VigIni))
+                        {{$brief->VigIni}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de inicio.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha final:</b></h4>
+                <span>
+                    @if(isset($brief->VigFin))
+                        {{$brief->VigFin}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de Fin.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha de pago:</b></h4>
+                <span>
+                    @if(isset($brief->VigPag))
+                        {{$brief->VigPag}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de pago.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Presupuesto:</b></h4>
+                <span>
+                    @if(isset($brief->Pres))
+                        &#36;{{number_format($brief->Pres)}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin presupuesto.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>forma de pago al vendedor:</b></h4>
+                <span>
+                    @if(isset($brief->ForPagVe))
+                        {{$brief->ForPagVe}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin forma de pago al vendedor.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>forma de pago del laboratorio:</b></h4>
+                <span>
+                    @if(isset($brief->ForPagLab))
+                        {{$brief->ForPagLab}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin forma de pago del laboratorio.</b>
+                    @endif
+                </span>
+            </div>
+            <!-- <div class="col-md-4 p-3">
                 <h4><b>Laboratorio:</b></h4>
                 <span>
                     @if(isset($brief->Laboratorio))
@@ -30,8 +90,8 @@
                     <b class="text-danger opacity-75"> Sin laboratorio.</b>
                     @endif
                 </span>
-            </div>
-            <div class="col-md-4 p-3">
+            </div> -->
+            <!-- <div class="col-md-4 p-3">
                 <h4><b>Vendedor:</b></h4>
                 <span>
                     
@@ -42,8 +102,8 @@
                     @endif
                     
                 </span>
-            </div>
-            <div class="col-md-4 p-3">
+            </div> -->
+            <!-- <div class="col-md-4 p-3">
                 <h4><b>Codigo de articulo:</b></h4>
                 <span>
                     @if(isset($brief->CodArticulo))
@@ -53,18 +113,8 @@
                        <b class="text-danger opacity-75">Sin articulo.</b>
                     @endif
                 </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>Descripción de articulo:</b></h4>
-                <span>
-                    @if(isset($brief->ItemName))
-                        {{$brief->ItemName}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin descripción.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
+            </div> -->
+            <div class="col-md-12 p-3">
                 <h4><b>Objetivo General:</b></h4>
                 <span>
                     @if(isset($brief->ObjGen))
@@ -74,7 +124,7 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-4 p-3">
+            <div class="col-md-12 p-3">
                 <h4><b>Objetivos Especificos:</b></h4>
                 <span>
                     
@@ -85,7 +135,7 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-4 p-3">
+            <div class="col-md-12 p-3">
                 <h4><b>Condiciones:</b></h4>
                 <span>
                     @if(isset($brief->Cond))
@@ -95,67 +145,7 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-4 p-3">
-                <h4><b>Fecha inicial:</b></h4>
-                <span>
-                    @if(isset($brief->VigIni))
-                        {{$brief->VigIni}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin fecha de inicio.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>Fecha final:</b></h4>
-                <span>
-                    @if(isset($brief->VigFin))
-                        {{$brief->VigFin}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin fecha de Fin.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>Fecha de pago:</b></h4>
-                <span>
-                    @if(isset($brief->VigPag))
-                        {{$brief->VigPag}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin fecha de pago.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>forma de pago al vendedor:</b></h4>
-                <span>
-                    @if(isset($brief->ForPagVe))
-                        {{$brief->ForPagVe}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin forma de pago al vendedor.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>forma de pago del laboratorio:</b></h4>
-                <span>
-                    @if(isset($brief->ForPagLab))
-                        {{$brief->ForPagLab}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin forma de pago del laboratorio.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
-                <h4><b>Presupuesto:</b></h4>
-                <span>
-                    @if(isset($brief->Pres))
-                        {{$brief->Pres}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin presupuesto.</b>
-                    @endif
-                </span>
-            </div>
-            <div class="col-md-4 p-3">
+            <!-- <div class="col-md-4 p-3">
                 <h4><b>Meta:</b></h4>
                 <span>
                     @if(isset($brief->Meta))
@@ -164,15 +154,44 @@
                        <b class="text-danger opacity-75"> Sin meta.</b>
                     @endif
                 </span>
-            </div>
+            </div> -->
         </div>
-        <div class="row d-flex justify-content-center">
-                <div class="col-2">
+        <div class="row d-flex justify-content-center mb-3">
+                <div class="col-8 col-md-2">
                     <a href="{{route('brief.index')}}" class="d-grid gap-2">
                     <button type="button" class="btn btn-outline-dark">Volver</button>
                     </a>
                 </div>
             </div>
+    </div>
+    <div class="col-12 col-md-7 pt-3 pt-md-0">
+        
+        <div class="table-responsive">
+            <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
+                <thead>
+                    <tr> 
+                        <th>Vendedor</th>
+                        <th>Articulo</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach($detalle_brief as $detalle)
+                            <tr>
+                                <td>{{$detalle['vendedor_id']}}</td>
+                                
+                                    @foreach($articulos as $arti)
+                                        @if($arti['ItemCode'] == $detalle['articulo_id'])
+                                            <td>{{$arti['ItemName']}}</td>
+                                        @endif
+                                    @endforeach
+
+                                <td>&#36;{{number_format($detalle['Meta'])}}</td>
+                            </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
