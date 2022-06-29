@@ -14,11 +14,10 @@
         <form action="{{route('brief.store')}}" method="POST">
             @csrf
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="form-floating mb-3">
                         <select class="form-select selector  @error('Solicitante') is-invalid @enderror" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
-                            <option value="" readonly selected>Solicitante</option>
+                            <option value="" readonly disabled selected>Solicitante</option>
                             <option value="1">marta</option>
                             <option value="2">pable</option>
                             <option value="3">pepito</option>
@@ -74,7 +73,6 @@
                         </span>                            
                         @enderror
                 </div>
-                
                 <div class="col-md-6">
                     <div class="form-floating">
                         <textarea class="form-control mb-3" name="ObjGen" placeholder="Leave a comment here" id="obj-gen" style="height: 100px"></textarea>
@@ -93,26 +91,10 @@
                         <label for="obj-esp">Objetivos Especificos.</label>
                     </div>
                 </div>
-
-                <!-- <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <select class="form-select selector @error('Laboratorio') is-invalid @enderror" name="Laboratorio" id="laboratorio" aria-label="Floating label select example">
-                            <option value="" readonly selected>Laboratotio</option>
-                            <option value="Quimicos">Quimicos</option>
-                            <option value="vete">vete</option>
-                        </select>
-                        @error('Laboratorio')
-                        <span class="invalid-feedback" role="alert">
-                            <small>{{ $message }}</small>
-                        </span>                            
-                        @enderror
-                    </div>
-                </div> -->
-
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <select class="form-select selector" id="slp-name" aria-label="Floating label select example">
-                            <option value="" readonly selected>Vendedor</option>
+                            <option value="" readonly disabled selected>Vendedor</option>
                             <option value="1">marta</option>
                             <option value="2">pable</option>
                             <option value="3">pepito</option>
@@ -122,7 +104,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <select class="form-select selector" id="cod-articulo" aria-label="Floating label select example">
-                            <option value="" readonly selected>Articulo</option>
+                            <option value="" readonly disabled selected>Articulo</option>
                             @foreach($articulos as $arti)
                             <option value="{{$arti['ItemCode']}}">{{$arti['ItemName']}}</option>
                             @endforeach
@@ -158,29 +140,23 @@
                         </table>
                     </div>
                 </div>
-
-
-                <!-- <div class="col-md-6">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ItemName" placeholder="Leave a comment here" id="item-name" style="height: 100px"></textarea>
-                        <label for="item-name">Descripción Articulo</label>
-                    </div>
-                </div> -->
                 <div class="col-md-6">
                     <div class="form-floating">
                         <select class="form-select  mb-3" name="ForPagVe" id="for-pag-ve" aria-label="Floating label select example">
-                            <option value="" readonly selected>Forma de pago al vendedor</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Consignación">Consignación</option>
+                            <option value="" readonly disabled selected>Forma de pago al vendedor</option>
+                            <option value="Nomina">Nomina.</option>
+                            <option value="Bono">Bono.</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
                         <select class="form-select  mb-3" name="ForPagLab" id="for-pag-lab" aria-label="Floating label select example">
-                            <option value="" readonly selected>Forma de pago del laboratorio</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Consignación">Consignación</option>
+                            <option value="" readonly disabled selected>Forma de pago del laboratorio</option>
+                            <option value="Nota credito">Nota Credito.</option>
+                            <option value="Factura">Factura.</option>
+                            <option value="Producto">Producto.</option>
+                            <option value="Bono">Bono.</option>
                         </select>
                     </div>
                 </div>
@@ -199,7 +175,6 @@
     </div>
 </div>
 @endsection
-
 @section('css')
 <style>
     .coloresCorp{
@@ -218,48 +193,49 @@
     }
 </style>
 @endsection
-
 @section('script')
 <script>
-    
     function agregar_esp() {
             let vendedor_id = $("#slp-name option:selected").val();
             let articulo_id = $("#cod-articulo option:selected").val();
             let meta = $("#meta").val();
-            
             let vendedor_name = $("#slp-name option:selected").text();
             let articulo_name = $("#cod-articulo option:selected").text();
             var formato = new Intl.NumberFormat('es-MX', {
                 style: 'currency',
                 currency: 'MXN',
             });
-            $("#table_brief_detalle").append(`
-                <tr id="tr-${vendedor_id}">
-                    
-                        <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
-                        <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
-                        <input type="hidden" name="Meta[]" value="${meta}"/>
-                    <td>
-                        ${vendedor_name}
-                    </td>
-                    <td>
-                        ${articulo_name}
-                    </td>
-                    <td>
-                        ${formato.format(meta)}
-                    </td>
-                    <td class="text-center">
-                        <button  type="button" class="btn btn-danger" onclick="eliminar(${vendedor_id})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
-            `);
-            
+            if (vendedor_id != 0 ) {
+                $("#table_brief_detalle").append(`
+                    <tr id="tr-${vendedor_id}">
+                            <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
+                            <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
+                            <input type="hidden" name="Meta[]" value="${meta}"/>
+                        <td>
+                            ${vendedor_name}
+                        </td>
+                        <td>
+                            ${articulo_name}
+                        </td>
+                        <td>
+                            ${formato.format(meta)}
+                        </td>
+                        <td class="text-center">
+                            <button  type="button" class="btn btn-danger" onclick="eliminar(${vendedor_id})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `);
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¡Atención!',
+                    text: `Seleccionar elementos para agregar a la tabla.`,
+                })
+            }
         }
-        
         function eliminar(id) {
             let fila = $("#tr-"+id);
             fila.remove();
         }
-
 </script>
 @endsection

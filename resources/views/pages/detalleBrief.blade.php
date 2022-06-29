@@ -81,39 +81,6 @@
                     @endif
                 </span>
             </div>
-            <!-- <div class="col-md-4 p-3">
-                <h4><b>Laboratorio:</b></h4>
-                <span>
-                    @if(isset($brief->Laboratorio))
-                    {{$brief->Laboratorio}}
-                    @else
-                    <b class="text-danger opacity-75"> Sin laboratorio.</b>
-                    @endif
-                </span>
-            </div> -->
-            <!-- <div class="col-md-4 p-3">
-                <h4><b>Vendedor:</b></h4>
-                <span>
-                    
-                    @if(isset($brief->SlpName))
-                        {{$brief->SlpName}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin vendedor.</b>
-                    @endif
-                    
-                </span>
-            </div> -->
-            <!-- <div class="col-md-4 p-3">
-                <h4><b>Codigo de articulo:</b></h4>
-                <span>
-                    @if(isset($brief->CodArticulo))
-                    {{$brief->CodArticulo}}
-                    @else
-                    
-                       <b class="text-danger opacity-75">Sin articulo.</b>
-                    @endif
-                </span>
-            </div> -->
             <div class="col-md-12 p-3">
                 <h4><b>Objetivo General:</b></h4>
                 <span>
@@ -145,16 +112,6 @@
                     @endif
                 </span>
             </div>
-            <!-- <div class="col-md-4 p-3">
-                <h4><b>Meta:</b></h4>
-                <span>
-                    @if(isset($brief->Meta))
-                        {{$brief->Meta}}
-                    @else
-                       <b class="text-danger opacity-75"> Sin meta.</b>
-                    @endif
-                </span>
-            </div> -->
         </div>
         <div class="row d-flex justify-content-center mb-3">
                 <div class="col-8 col-md-2">
@@ -165,7 +122,6 @@
             </div>
     </div>
     <div class="col-12 col-md-7 pt-3 pt-md-0">
-        
         <div class="table-responsive">
             <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
                 <thead>
@@ -179,13 +135,11 @@
                         @foreach($detalle_brief as $detalle)
                             <tr>
                                 <td>{{$detalle['vendedor_id']}}</td>
-                                
                                     @foreach($articulos as $arti)
                                         @if($arti['ItemCode'] == $detalle['articulo_id'])
                                             <td>{{$arti['ItemName']}}</td>
                                         @endif
                                     @endforeach
-
                                 <td>&#36;{{number_format($detalle['Meta'])}}</td>
                             </tr>
                     @endforeach
@@ -195,7 +149,6 @@
     </div>
 </div>
 @endsection
-
 @section('css')
 <style>
     .coloresCorp{
@@ -203,10 +156,4 @@
         font-weight: 900;
     }
 </style>
-@endsection
-
-@section('script')
-<script>
-
-</script>
 @endsection

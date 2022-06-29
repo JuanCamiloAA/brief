@@ -17,8 +17,8 @@ return new class extends Migration
             $table->BigIncrements('id');
             $table->unsignedBigInteger('Brief_id');  
             $table->foreign('Brief_id')->references('Brief')->on('TABLE_BRIEF');
-            $table->string('vendedor_id')->nullable();
-            $table->string('articulo_id')->nullable();
+            $table->string('vendedor_id', 50)->nullable();
+            $table->string('articulo_id', 50)->nullable();
             $table->double('Meta',19,6)->nullable();
             
         });

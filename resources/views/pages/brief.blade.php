@@ -15,7 +15,6 @@
     </div>
 </div>
 <div class="row op_foot rounded p-4 mt-3">
-    
     <div class="col-12 mt-2">
         <div class="table-responsive">
             <table id="dt" style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
@@ -30,30 +29,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($brief as $brief)
-                    <tr>
-                        <td>{{$brief->Brief}}</td>
-                        <td>{{$brief->Solicitante}}</td>
-                        <td>{{$brief->VigIni}}</td>
-                        <td>{{$brief->VigFin}}</td>
-                        <td>{{$brief->VigFin}}</td>
-                        <td class="d-flex justify-content-around">
-                        <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->
-                        <a href="{{route('brief.show', $brief->Brief)}}"><i class="text-info fas fa-info-circle"></i></a>
-                        </td>
-                    </tr>
-                @endforeach
-
+                    @foreach($brief as $brief)
+                        <tr>
+                            <td>{{$brief->Brief}}</td>
+                            <td>{{$brief->Solicitante}}</td>
+                            <td>{{$brief->VigIni}}</td>
+                            <td>{{$brief->VigFin}}</td>
+                            <td>{{$brief->VigFin}}</td>
+                            <td class="d-flex justify-content-around">
+                            <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->
+                            <a href="{{route('brief.show', $brief->Brief)}}"><i class="text-info fas fa-info-circle"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    <!-- <div class="col">
-        <p></p>
-    </div> -->
 </div>
 @endsection
-
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <style>
@@ -64,7 +58,6 @@
     div.dataTables_wrapper div.dataTables_length label, div.dataTables_filter label {
         font-weight: bold!important;
     }
-    
     div.dataTables_wrapper div.dataTables_length label select, div.dataTables_filter label input{
         color: white!important;
         background: #212529!important;
@@ -75,7 +68,6 @@
     }
 </style>
 @endsection
-
 @section('script')
 	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
@@ -86,10 +78,6 @@
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
-                
-                    button: {
-                        className: 'btn btn-outline-info mr-2' //Primary class for all buttons
-                    }
             }
             );
         });
