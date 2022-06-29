@@ -15,10 +15,6 @@ class BRIEF extends Model
     
     protected  $fillable = [
         'Solicitante',
-        'Laboratorio',
-        'CodArticulo',
-        'ItemName',
-        'SlpName',
         'VigIni',
         'VigFin',
         'VigPag',
@@ -28,7 +24,6 @@ class BRIEF extends Model
         'ForPagVe',
         'ForPagLab',
         'Pres',
-        'Meta',
     ];
     public $timestamps = false;
 }

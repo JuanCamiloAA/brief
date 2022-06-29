@@ -18,9 +18,16 @@
                     <div class="form-floating mb-3">
                         <select class="form-select selector  @error('Solicitante') is-invalid @enderror" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Solicitante</option>
-                            <option value="1">marta</option>
-                            <option value="2">pable</option>
-                            <option value="3">pepito</option>
+                            <option value="IvanAgro S.A" >IvanAgro S.A</option>
+                                {{$labo = ''}}
+                                @foreach($articulos as $lab)
+
+                                    @if($labo != $lab['BusinessPartners']['CardName'])
+                                        <option value="{{$lab['BusinessPartners']['CardName']}}">{{$lab['BusinessPartners']['CardName']}}</option>
+                                    @endif
+
+                                    {{$labo = $lab['BusinessPartners']['CardName']}}
+                                @endforeach
                         </select>
                         @error('Solicitante')
                         <span class="invalid-feedback" role="alert">
@@ -31,7 +38,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control @error('VigIni') is-invalid @enderror" name="VigIni" id="vig-ini" placeholder="name@example.com">
+                        <input type="date" class="form-control @error('VigIni') is-invalid @enderror" name="VigIni" id="vig-ini" value="{{old('VigIni')}}" placeholder="name@example.com">
                         <label for="vig-ini">Fecha Inicio <b style="color: red;">*</b>.</label>
                         @error('VigIni')
                         <span class="invalid-feedback" role="alert">
@@ -42,7 +49,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control @error('VigFin') is-invalid @enderror" name="VigFin" id="vig-fin" placeholder="name@example.com">
+                        <input type="date" class="form-control @error('VigFin') is-invalid @enderror" name="VigFin" value="{{old('VigFin')}}" id="vig-fin" placeholder="name@example.com">
                         <label for="vig-fin">Fecha Fin <b style="color: red;">*</b>.</label>
                         @error('VigIni')
                         <span class="invalid-feedback" role="alert">
@@ -53,7 +60,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control @error('VigPag') is-invalid @enderror" name="VigPag" id="vig-pag" placeholder="name@example.com">
+                        <input type="date" class="form-control @error('VigPag') is-invalid @enderror" name="VigPag" id="vig-pag" value="{{old('VigPag')}}" placeholder="name@example.com">
                         <label for="vig-pag">Fecha Pago <b style="color: red;">*</b>.</label>
                     </div>
                         @error('VigPag')
@@ -64,7 +71,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control  @error('Pres') is-invalid @enderror" name="Pres" id="pres" placeholder="name@example.com">
+                        <input type="number" class="form-control  @error('Pres') is-invalid @enderror" name="Pres" id="pres" value="{{old('Pres')}}" placeholder="name@example.com">
                         <label for="pres">Presupuesto <b style="color: red;">*</b>.</label>
                     </div>
                         @error('Pres')
@@ -75,19 +82,19 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ObjGen" placeholder="Leave a comment here" id="obj-gen" style="height: 100px"></textarea>
+                        <textarea class="form-control mb-3" name="ObjGen" placeholder="Leave a comment here" id="obj-gen" style="height: 100px">{{old('ObjGen')}}</textarea>
                         <label for="obj-gen">Objetivo General.</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <textarea class="form-control mb-3" name="Cond" placeholder="Leave a comment here" id="cond" style="height: 100px"></textarea>
+                        <textarea class="form-control mb-3" name="Cond" placeholder="Leave a comment here" id="cond" style="height: 100px">{{old('Cond')}}</textarea>
                         <label for="cond">Condiciones</label>
                     </div>
                 </div>
                 <div class="col-md-12 pb-5">
                     <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ObjEsp" placeholder="Leave a comment here" id="obj-esp" style="height: 100px"></textarea>
+                        <textarea class="form-control mb-3" name="ObjEsp" placeholder="Leave a comment here" id="obj-esp" style="height: 100px">{{old('ObjEsp')}}</textarea>
                         <label for="obj-esp">Objetivos Especificos.</label>
                     </div>
                 </div>
@@ -106,7 +113,7 @@
                         <select class="form-select selector" id="cod-articulo" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Articulo</option>
                             @foreach($articulos as $arti)
-                            <option value="{{$arti['ItemCode']}}">{{$arti['ItemName']}}</option>
+                            <option value="{{$arti['Items']['ItemCode']}}" laboratorio="{{$arti['BusinessPartners']['CardName']}}" nombre="{{$arti['Items']['ItemName']}}"><i>{{$arti['Items']['ItemName']}}</i> <b>-[{{$arti['BusinessPartners']['CardName']}}]-</b></option>
                             @endforeach
                         </select>
                     </div>
@@ -114,7 +121,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" id="meta" placeholder="name@example.com">
-                        <label for="meta">Meta <b style="color: red;">*</b>.</label>
+                        <label for="meta">Meta.</label>
                     </div>
                 </div>
                 <div class="col-md-6 pb-3 pb-md-0">
@@ -130,6 +137,7 @@
                                 <tr> 
                                     <th>Vendedor</th>
                                     <th>Articulo</th>
+                                    <th>Laboratorio</th>
                                     <th>Meta</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -198,39 +206,56 @@
     function agregar_esp() {
             let vendedor_id = $("#slp-name option:selected").val();
             let articulo_id = $("#cod-articulo option:selected").val();
+            let laboratorio = $("#cod-articulo option:selected").attr("laboratorio");
             let meta = $("#meta").val();
             let vendedor_name = $("#slp-name option:selected").text();
-            let articulo_name = $("#cod-articulo option:selected").text();
+            let articulo_name = $("#cod-articulo option:selected").attr('nombre');
             var formato = new Intl.NumberFormat('es-MX', {
                 style: 'currency',
                 currency: 'MXN',
             });
-            if (vendedor_id != 0 ) {
-                $("#table_brief_detalle").append(`
-                    <tr id="tr-${vendedor_id}">
-                            <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
-                            <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
-                            <input type="hidden" name="Meta[]" value="${meta}"/>
-                        <td>
-                            ${vendedor_name}
-                        </td>
-                        <td>
-                            ${articulo_name}
-                        </td>
-                        <td>
-                            ${formato.format(meta)}
-                        </td>
-                        <td class="text-center">
-                            <button  type="button" class="btn btn-danger" onclick="eliminar(${vendedor_id})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `);
+            if (vendedor_id != "" ) {
+                if (meta != "") {
+                    $("#table_brief_detalle").append(`
+                        <tr id="tr-${vendedor_id}">
+                                <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
+                                <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
+                                <input type="hidden" name="laboratorio[]" value="${laboratorio}"/>
+                                <input type="hidden" name="Meta[]" value="${meta}"/>
+                            <td>
+                                ${vendedor_name}
+                            </td>
+                            <td>
+                                ${articulo_name}
+                            </td>
+                            <td>
+                                ${laboratorio}
+                            </td>
+                            <td>
+                                ${formato.format(meta)}
+                            </td>
+                            <td class="text-center">
+                                <button  type="button" class="btn btn-danger" onclick="eliminar(${vendedor_id})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `);
+                } else {
+                    Swal.fire({
+                        title: '¡Atención!',
+                        text: 'Ingrese una meta.',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#212529',
+                    })
+                }
             } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '¡Atención!',
-                    text: `Seleccionar elementos para agregar a la tabla.`,
-                })
+                    Swal.fire({
+                        title: '¡Atención!',
+                        text: 'Seleccione un vendedor.',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#212529',
+                    })
             }
         }
         function eliminar(id) {

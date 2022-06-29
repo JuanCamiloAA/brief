@@ -128,6 +128,7 @@
                     <tr> 
                         <th>Vendedor</th>
                         <th>Articulo</th>
+                        <th>Laboratorio</th>
                         <th>Meta</th>
                     </tr>
                 </thead>
@@ -136,10 +137,11 @@
                             <tr>
                                 <td>{{$detalle['vendedor_id']}}</td>
                                     @foreach($articulos as $arti)
-                                        @if($arti['ItemCode'] == $detalle['articulo_id'])
-                                            <td>{{$arti['ItemName']}}</td>
+                                        @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
+                                            <td>{{$arti['Items']['ItemName']}}</td>
                                         @endif
                                     @endforeach
+                                <td>{{$detalle['laboratorio_id']}}</td>
                                 <td>&#36;{{number_format($detalle['Meta'])}}</td>
                             </tr>
                     @endforeach
