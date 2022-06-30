@@ -22,6 +22,7 @@ class BriefController extends Controller
     public function index()
     {
         $brief = BRIEF::all();
+
         return view('pages.brief', compact('brief'));
     }
 
@@ -35,12 +36,21 @@ class BriefController extends Controller
         session_start();
         do {
             $retorno = Http::withToken($_SESSION['B1SESSION'])
-            ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
+            ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
         } while ($retorno->clientError());
         $retorno = $retorno->json();
+        
         $articulos = $retorno['value'];
         // dd($articulos);
-        return view('pages.formBrief',compact('articulos'));
+        
+        do {
+            $employes = Http::withToken($_SESSION['B1SESSION'])
+            ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
+        } while ($employes->clientError());
+        $employes = $employes->json();
+        $empleados = $employes['value'];
+        // dd($empleados);
+        return view('pages.formBrief',compact('articulos', 'empleados'));
     }
 
     /**
@@ -56,6 +66,7 @@ class BriefController extends Controller
             DB::beginTransaction();
             $breif = BRIEF::create([
                 "Solicitante" => $input["Solicitante"],
+                "Solicitante_name" => $input["laboratorio_name"],
                 "VigIni" => $input["VigIni"],
                 "VigFin" => $input["VigFin"],
                 "VigPag" => $input["VigPag"],
@@ -99,11 +110,19 @@ class BriefController extends Controller
         session_start();
         do {
             $retorno = Http::withToken($_SESSION['B1SESSION'])
-            ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
+            ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
         } while ($retorno->clientError());
         $retorno = $retorno->json();
         $articulos = $retorno['value'];
-        return view('pages.detalleBrief', compact('brief', 'detalle_brief', 'articulos'));
+        
+        do {
+            $employes = Http::withToken($_SESSION['B1SESSION'])
+            ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
+        } while ($employes->clientError());
+        $employes = $employes->json();
+        $empleados = $employes['value'];
+
+        return view('pages.detalleBrief', compact('brief', 'detalle_brief', 'articulos', 'empleados'));
     }
 
     /**

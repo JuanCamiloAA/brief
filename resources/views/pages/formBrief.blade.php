@@ -23,7 +23,7 @@
                                 @foreach($articulos as $lab)
 
                                     @if($labo != $lab['BusinessPartners']['CardName'])
-                                        <option value="{{$lab['BusinessPartners']['CardName']}}">{{$lab['BusinessPartners']['CardName']}}</option>
+                                        <option value="{{$lab['BusinessPartners']['CardCode']}}">{{$lab['BusinessPartners']['CardName']}}</option>
                                     @endif
 
                                     {{$labo = $lab['BusinessPartners']['CardName']}}
@@ -102,9 +102,9 @@
                     <div class="form-floating mb-3">
                         <select class="form-select selector" id="slp-name" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Vendedor</option>
-                            <option value="1">marta</option>
-                            <option value="2">pable</option>
-                            <option value="3">pepito</option>
+                            @foreach ($empleados as $emp)
+                            <option value="{{$emp['SalesEmployeeCode']}}">{{$emp['SalesEmployeeName']}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                         <select class="form-select selector" id="cod-articulo" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Articulo</option>
                             @foreach($articulos as $arti)
-                            <option value="{{$arti['Items']['ItemCode']}}" laboratorio="{{$arti['BusinessPartners']['CardName']}}" nombre="{{$arti['Items']['ItemName']}}"><i>{{$arti['Items']['ItemName']}}</i> <b>-[{{$arti['BusinessPartners']['CardName']}}]-</b></option>
+                            <option value="{{$arti['Items']['ItemCode']}}" laboratorio_cod="{{$arti['BusinessPartners']['CardCode']}}" laboratorio_name="{{$arti['BusinessPartners']['CardName']}}" nombre="{{$arti['Items']['ItemName']}}"><i>{{$arti['Items']['ItemName']}}</i> <b>-[{{$arti['BusinessPartners']['CardName']}}]-</b></option>
                             @endforeach
                         </select>
                     </div>
@@ -204,9 +204,10 @@
 @section('script')
 <script>
     function agregar_esp() {
+            let laboratorio_name = $("#solicitante option:selected").text();
             let vendedor_id = $("#slp-name option:selected").val();
             let articulo_id = $("#cod-articulo option:selected").val();
-            let laboratorio = $("#cod-articulo option:selected").attr("laboratorio");
+            let laboratorio = $("#cod-articulo option:selected").attr("laboratorio_cod");
             let meta = $("#meta").val();
             let vendedor_name = $("#slp-name option:selected").text();
             let articulo_name = $("#cod-articulo option:selected").attr('nombre');
@@ -218,6 +219,7 @@
                 if (meta != "") {
                     $("#table_brief_detalle").append(`
                         <tr id="tr-${vendedor_id}">
+                                <input type="hidden" name="laboratorio_name" value="${laboratorio_name}"/>
                                 <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
                                 <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
                                 <input type="hidden" name="laboratorio[]" value="${laboratorio}"/>
@@ -229,7 +231,7 @@
                                 ${articulo_name}
                             </td>
                             <td>
-                                ${laboratorio}
+                                ${laboratorio_name}
                             </td>
                             <td>
                                 ${formato.format(meta)}

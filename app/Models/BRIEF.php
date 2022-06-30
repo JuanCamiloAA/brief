@@ -15,6 +15,7 @@ class BRIEF extends Model
     
     protected  $fillable = [
         'Solicitante',
+        'Solicitante_name',
         'VigIni',
         'VigFin',
         'VigPag',

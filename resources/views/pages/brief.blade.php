@@ -32,7 +32,9 @@
                     @foreach($brief as $brief)
                         <tr>
                             <td>{{$brief->Brief}}</td>
-                            <td>{{$brief->Solicitante}}</td>
+                        
+                            <td>{{$brief->Solicitante_name}}</td>
+
                             <td>{{$brief->VigIni}}</td>
                             <td>{{$brief->VigFin}}</td>
                             <td>{{$brief->VigFin}}</td>

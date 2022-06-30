@@ -15,7 +15,7 @@
                 <h4><b>Solicitante:</b></h4>
                 <span>
                     @if(isset($brief->Solicitante))
-                    {{$brief->Solicitante}}
+                    {{$brief->Solicitante_name}}
                     @else
                        <b class="text-danger opacity-75"> Sin solicitante.</b>
                     @endif
@@ -135,7 +135,15 @@
                 <tbody>
                         @foreach($detalle_brief as $detalle)
                             <tr>
-                                <td>{{$detalle['vendedor_id']}}</td>
+                                
+                                @foreach($empleados as $emp)
+                                    @if($emp['SalesEmployeeCode'] == $detalle['vendedor_id'])
+                                        <td>{{$emp['SalesEmployeeName']}}</td>
+                                    @endif
+                                @endforeach
+
+                                <!-- <td>{{$detalle['vendedor_id']}}</td> -->
+
                                     @foreach($articulos as $arti)
                                         @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
                                             <td>{{$arti['Items']['ItemName']}}</td>

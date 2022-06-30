@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('TABLE_BRIEF', function (Blueprint $table) {
             $table->BigIncrements('Brief');
             $table->String('Solicitante',100);
+            $table->String('Solicitante_name',100);
             $table->date('VigIni');
             $table->date('VigFin');
             $table->date('VigPag');
