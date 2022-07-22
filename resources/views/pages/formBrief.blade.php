@@ -7,14 +7,14 @@
 <div class="row justify-content-center py-4">
     <div class="col-md-10 col-12 op rounded px-4">
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center py-3">
                 <h1 class="coloresCorp">Crear Brief.</h1>
             </div>
         </div>
         <form action="{{route('brief.store')}}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="form-floating mb-3">
                         <select class="form-select selector  @error('Solicitante') is-invalid @enderror" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Solicitante</option>
@@ -34,6 +34,35 @@
                             <small>{{ $message }}</small>
                         </span>                            
                         @enderror
+                    </div>
+                </div> -->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <div class="col-lg-3 col-md-4 col-5">
+                                <label class="input-group-text text-center" style="height: 3.5rem;" for="solicitante">Solicitante. <b style="font-size: 18px; color: red;">*</b></label>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-7">
+                                <select class="form-select select2  @error('Solicitante') is-invalid @enderror"  name="Solicitante" id="solicitante">
+                                    <option value="">Solicitante.</option>
+                                    <option value="IvanAgro S.A" >IvanAgro S.A</option>
+                                        {{$labo = ''}}
+                                        @foreach($articulos as $lab)
+
+                                            @if($labo != $lab['BusinessPartners']['CardName'])
+                                                <option value="{{$lab['BusinessPartners']['CardCode']}}">{{$lab['BusinessPartners']['CardName']}}</option>
+                                            @endif
+
+                                            {{$labo = $lab['BusinessPartners']['CardName']}}
+                                        @endforeach
+                                </select>
+                                    @error('Solicitante')
+                                    <span class="invalid-feedback" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>                            
+                                    @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -98,7 +127,7 @@
                         <label for="obj-esp">Objetivos Especificos.</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <select class="form-select selector" id="slp-name" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Vendedor</option>
@@ -107,8 +136,25 @@
                             @endforeach
                         </select>
                     </div>
+                </div> -->
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <div class="col-lg-3 col-md-4 col-5">
+                                <label class="input-group-text text-center" style="height: 3.5rem;" for="slp-name">Vendedor. </label>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-7">
+                                <select class="form-select select2  @error('Solicitante') is-invalid @enderror" id="slp-name">
+                                    <option value="" readonly disabled selected>Vendedor</option>
+                                    @foreach ($empleados as $emp)
+                                    <option value="{{$emp['SalesEmployeeCode']}}">{{$emp['SalesEmployeeName']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <select class="form-select selector" id="cod-articulo" aria-label="Floating label select example">
                             <option value="" readonly disabled selected>Articulo</option>
@@ -116,6 +162,26 @@
                             <option value="{{$arti['Items']['ItemCode']}}" laboratorio_cod="{{$arti['BusinessPartners']['CardCode']}}" laboratorio_name="{{$arti['BusinessPartners']['CardName']}}" nombre="{{$arti['Items']['ItemName']}}"><i>{{$arti['Items']['ItemName']}}</i> <b>-[{{$arti['BusinessPartners']['CardName']}}]-</b></option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                 -->
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <div class="col-lg-3 col-md-4 col-5">
+                                <label class="input-group-text text-center" style="height: 3.5rem;" for="cod-articulo">Articulos. </label>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-7">
+                                <select class="form-select select2  @error('Solicitante') is-invalid @enderror"  id="cod-articulo">
+                                    <option value="" readonly disabled selected>Articulo</option>
+                                    @foreach($articulos as $arti)
+                                    <option value="{{$arti['Items']['ItemCode']}}" laboratorio_cod="{{$arti['BusinessPartners']['CardCode']}}" 
+                                    laboratorio_name="{{$arti['BusinessPartners']['CardName']}}" nombre="{{$arti['Items']['ItemName']}}">
+                                    <i>{{$arti['Items']['ItemName']}}</i> <b>-[{{$arti['BusinessPartners']['CardName']}}]-</b></option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">

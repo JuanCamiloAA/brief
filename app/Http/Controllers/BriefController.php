@@ -9,7 +9,7 @@ use App\Models\detalle_breif;
 use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client;
-Use Alert;
+use Alert;
 
 
 class BriefController extends Controller
@@ -34,23 +34,20 @@ class BriefController extends Controller
     public function create()
     {
         session_start();
-        do {
-            $retorno = Http::withToken($_SESSION['B1SESSION'])
+        $retorno = Http::retry(10, 300)->withToken($_SESSION['B1SESSION'])
             ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
-        } while ($retorno->clientError());
+
         $retorno = $retorno->json();
-        
+
         $articulos = $retorno['value'];
-        // dd($articulos);
-        
-        do {
-            $employes = Http::withToken($_SESSION['B1SESSION'])
-            ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
-        } while ($employes->clientError());
+
+        $employes = Http::retry(10, 300)->withToken($_SESSION['B1SESSION'])
+        ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
+
         $employes = $employes->json();
         $empleados = $employes['value'];
         // dd($empleados);
-        return view('pages.formBrief',compact('articulos', 'empleados'));
+        return view('pages.formBrief', compact('articulos', 'empleados'));
     }
 
     /**
@@ -62,7 +59,7 @@ class BriefController extends Controller
     public function store(formBrief $request)
     {
         try {
-            $input=$request->all();
+            $input = $request->all();
             DB::beginTransaction();
             $breif = BRIEF::create([
                 "Solicitante" => $input["Solicitante"],
@@ -77,21 +74,20 @@ class BriefController extends Controller
                 "ForPagLab" => $input["ForPagLab"],
                 "Pres" => $input["Pres"],
             ]);
-            foreach($input["vendedor_id"] as $key => $value){
-                // dd($input["laboratorio"][$key]);
+            foreach ($input["vendedor_id"] as $key => $value) {
                 detalle_breif::create([
                     "Brief_id" => $breif->Brief,
                     "vendedor_id" => $value,
-                    "articulo_id"=>$input["articulo_id"][$key],
-                    "laboratorio_id"=>$input["laboratorio"][$key],
-                    "Meta"=>$input["Meta"][$key],
+                    "articulo_id" => $input["articulo_id"][$key],
+                    "laboratorio_id" => $input["laboratorio"][$key],
+                    "Meta" => $input["Meta"][$key],
                 ]);
             }
             DB::commit();
-            alert()->success('BRIEF','BRIEF creado exitosamente.');
+            alert()->success('BRIEF', 'BRIEF creado exitosamente.');
             return Redirect()->route('brief.index');
         } catch (\Exception $e) {
-            alert()->error('BRIEF','BRIEF NO fue creado.');
+            alert()->error('BRIEF', 'BRIEF NO fue creado.');
         }
     }
 
@@ -105,20 +101,19 @@ class BriefController extends Controller
     {
         $brief = BRIEF::find($id);
         $detalle_brief = detalle_breif::select("TABLE_BRIEF.*", "detalle_brief.*")->join("TABLE_BRIEF", "TABLE_BRIEF.Brief", "=", "detalle_brief.Brief_id")
-        ->where("detalle_brief.Brief_id", $id)
-        ->get();
+            ->where("detalle_brief.Brief_id", $id)
+            ->get();
         session_start();
-        do {
-            $retorno = Http::withToken($_SESSION['B1SESSION'])
-            ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
-        } while ($retorno->clientError());
+        
+        $retorno = Http::retry(10, 300)->withToken($_SESSION['B1SESSION'])
+        ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
+        
         $retorno = $retorno->json();
         $articulos = $retorno['value'];
-        
-        do {
-            $employes = Http::withToken($_SESSION['B1SESSION'])
-            ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
-        } while ($employes->clientError());
+
+        $employes = Http::retry(10, 300)->withToken($_SESSION['B1SESSION'])
+        ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
+
         $employes = $employes->json();
         $empleados = $employes['value'];
 
