@@ -56,11 +56,9 @@
                                             {{$labo = $lab['BusinessPartners']['CardName']}}
                                         @endforeach
                                 </select>
-                                    @error('Solicitante')
-                                    <span class="invalid-feedback" role="alert">
-                                        <small>{{ $message }}</small>
-                                    </span>                            
-                                    @enderror
+                                @error('Solicitante')
+                                    <div class="alert alert-danger mt-1 mb-1"><small>{{ $message }}</small></div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -69,10 +67,9 @@
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control @error('VigIni') is-invalid @enderror" name="VigIni" id="vig-ini" value="{{old('VigIni')}}" placeholder="name@example.com">
                         <label for="vig-ini">Fecha Inicio <b style="color: red;">*</b>.</label>
+                        
                         @error('VigIni')
-                        <span class="invalid-feedback" role="alert">
-                            <small>{{ $message }}</small>
-                        </span>                            
+                            <div class="alert alert-danger mt-1 mb-1"><small>{{ $message }}</small></div>
                         @enderror
                     </div>
                 </div>
@@ -80,10 +77,8 @@
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control @error('VigFin') is-invalid @enderror" name="VigFin" value="{{old('VigFin')}}" id="vig-fin" placeholder="name@example.com">
                         <label for="vig-fin">Fecha Fin <b style="color: red;">*</b>.</label>
-                        @error('VigIni')
-                        <span class="invalid-feedback" role="alert">
-                            <small>{{ $message }}</small>
-                        </span>                            
+                        @error('VigFin')
+                            <div class="alert alert-danger mt-1 mb-1"><small>{{ $message }}</small></div>
                         @enderror
                     </div>
                 </div>
@@ -91,23 +86,19 @@
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control @error('VigPag') is-invalid @enderror" name="VigPag" id="vig-pag" value="{{old('VigPag')}}" placeholder="name@example.com">
                         <label for="vig-pag">Fecha Pago <b style="color: red;">*</b>.</label>
-                    </div>
                         @error('VigPag')
-                        <span class="invalid-feedback" role="alert">
-                            <small>{{ $message }}</small>
-                        </span>                            
+                            <div class="alert alert-danger mt-1 mb-1"><small>{{ $message }}</small></div>
                         @enderror
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control  @error('Pres') is-invalid @enderror" name="Pres" id="pres" value="{{old('Pres')}}" placeholder="name@example.com">
                         <label for="pres">Presupuesto <b style="color: red;">*</b>.</label>
-                    </div>
                         @error('Pres')
-                        <span class="invalid-feedback" role="alert">
-                            <small>{{ $message }}</small>
-                        </span>                            
+                            <div class="alert alert-danger mt-1 mb-1"><small>{{ $message }}</small></div>
                         @enderror
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
@@ -144,7 +135,7 @@
                                 <label class="input-group-text text-center" style="height: 3.5rem;" for="slp-name">Vendedor. </label>
                             </div>
                             <div class="col-lg-9 col-md-8 col-7">
-                                <select class="form-select select2  @error('Solicitante') is-invalid @enderror" id="slp-name">
+                                <select class="form-select select2" id="slp-name">
                                     <option value="" readonly disabled selected>Vendedor</option>
                                     @foreach ($empleados as $emp)
                                     <option value="{{$emp['SalesEmployeeCode']}}">{{$emp['SalesEmployeeName']}}</option>
@@ -172,7 +163,7 @@
                                 <label class="input-group-text text-center" style="height: 3.5rem;" for="cod-articulo">Articulos. </label>
                             </div>
                             <div class="col-lg-9 col-md-8 col-7">
-                                <select class="form-select select2  @error('Solicitante') is-invalid @enderror"  id="cod-articulo">
+                                <select class="form-select select2"  id="cod-articulo">
                                     <option value="" readonly disabled selected>Articulo</option>
                                     @foreach($articulos as $arti)
                                     <option value="{{$arti['Items']['ItemCode']}}" laboratorio_cod="{{$arti['BusinessPartners']['CardCode']}}" 
@@ -221,6 +212,7 @@
                             <option value="Nomina">Nomina.</option>
                             <option value="Bono">Bono.</option>
                         </select>
+                        <label for="for-pag-ve">Forma de pago al vendedor.</label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -232,6 +224,7 @@
                             <option value="Producto">Producto.</option>
                             <option value="Bono">Bono.</option>
                         </select>
+                        <label for="for-pag-lab">Forma de pago del laboratorio.</label>
                     </div>
                 </div>
             </div>

@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'es_ES',
+    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Laraveles\Spanish\SpanishServiceProvider::class,
 
 
         /*

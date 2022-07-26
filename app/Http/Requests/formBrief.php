@@ -28,7 +28,7 @@ class formBrief extends FormRequest
             'VigIni'=>['required'],
             'VigFin'=>['required'],
             'VigPag'=>['required'],
-            'Pres'=>['required'],
+            'Pres'=>['required', 'number', 'max:100'],
         ];
     }
     

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->String('Cond',200)->nullable();
             $table->double('Pres',19,6)->nullable();
             $table->String('Area',50)->nullable();
-
+            $table->boolean('State');
         });
     }
 
