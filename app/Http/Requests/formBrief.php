@@ -25,21 +25,36 @@ class formBrief extends FormRequest
     {
         return [
             'Solicitante'=>['required'],
-            'VigIni'=>['required'],
-            'VigFin'=>['required'],
-            'VigPag'=>['required'],
-            'Pres'=>['required', 'number', 'max:100'],
+            'VigIni'=>['required', 'date'],
+            'VigFin'=>['required', 'date'],
+            'VigPag'=>['required', 'date'],
+            'VigLiq'=>['required', 'date'],
+            'ObjGen'=>['max:1600'],
+            'ObjEsp'=>['max:1600'],
+            'Cond'=>['max:200'],
+            'ForPagVe'=>['required'],
+            'ForPagLab'=>['required'],
+            'Pres'=>['required'],
+            'State'=>['int'],
         ];
     }
     
     public function attributes()
     {
         return [
-            'Solicitante'=>'Solicitante',
-            'VigIni'=>'Fecha Inicio',
-            'VigFin'=>'Fecha final',
-            'VigPag'=>'Fecha de pago',
-            'Pres'=>'Presupuesto'
+            'Solicitante'=> ' Solicitante ',
+            'VigIni'=> ' Fecha Inicio ',
+            'VigFin'=> ' Fecha final ',
+            'VigPag'=> ' Fecha de pago ',
+            'VigLiq'=> ' Fecha de liquidación ',
+            'Pres'=> ' Presupuesto ',
+            'ObjGen'=> ' Objetivo general ',
+            'ObjEsp'=> ' Objetivos especificos ',
+            'Cond'=> ' Condiciones ',
+            'ForPagVe'=> ' Forma de pago al vendedor ',
+            'ForPagLab'=> ' Forma de pago del lavoratorio ',
+            'Pres'=> ' Presupuesto ',
+            'State'=> ' Estado ',
         ];
     }
 }

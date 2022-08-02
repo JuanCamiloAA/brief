@@ -11,6 +11,9 @@ body{
 }
 .fondogeneral{
     background-image: url("../img/fondologin.jpg");
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
 }
 .fondo-btn{
     background: #053402;

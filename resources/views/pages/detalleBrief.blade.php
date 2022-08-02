@@ -42,9 +42,19 @@
                 </span>
             </div>
             <div class="col-md-6 p-3">
+                <h4><b>Fecha de liquidación:</b></h4>
+                <span>
+                    @if(isset($brief->VigLiq))
+                        {{$brief->VigLiq}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de liquidación.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
                 <h4><b>Fecha de pago:</b></h4>
                 <span>
-                    @if(isset($brief->VigPag))
+                    @if(isset($brief->VigLiq))
                         {{$brief->VigPag}}
                     @else
                        <b class="text-danger opacity-75"> Sin fecha de pago.</b>
@@ -81,7 +91,7 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-12 p-3">
+            <div class="col-md-12 p-3 text-lg-center">
                 <h4><b>Objetivo General:</b></h4>
                 <span>
                     @if(isset($brief->ObjGen))
@@ -91,7 +101,7 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-12 p-3">
+            <div class="col-md-12 p-3 text-lg-center">
                 <h4><b>Objetivos Especificos:</b></h4>
                 <span>
                     
@@ -102,13 +112,28 @@
                     @endif
                 </span>
             </div>
-            <div class="col-md-12 p-3">
+            <div class="col-md-12 p-3 text-lg-center">
                 <h4><b>Condiciones:</b></h4>
                 <span>
                     @if(isset($brief->Cond))
                         {{$brief->Cond}}
                     @else
                        <b class="text-danger opacity-75"> Sin condiciones.</b>
+                    @endif
+                </span>
+            </div>
+            
+            <div class="col-md-12 p-3">
+                <h4><b>Estado:</b></h4>
+                <span>
+                    @if($brief->State)
+                        <div class="alert alert-success text-center" role="alert">
+                            <b>Activo</b> 
+                        </div>
+                    @else
+                        <div class="alert alert-danger text-center" role="alert">
+                            <b>Inactivo</b> 
+                        </div>
                     @endif
                 </span>
             </div>
@@ -143,12 +168,15 @@
                                 @endforeach
 
                                 <!-- <td>{{$detalle['vendedor_id']}}</td> -->
-
+                                @if($detalle['articulo_id'] == "General")
+                                    <td>General</td>
+                                @else
                                     @foreach($articulos as $arti)
                                         @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
                                             <td>{{$arti['Items']['ItemName']}}</td>
                                         @endif
                                     @endforeach
+                                @endif
                                 <td>{{$detalle['laboratorio_id']}}</td>
                                 <td>&#36;{{number_format($detalle['Meta'])}}</td>
                             </tr>

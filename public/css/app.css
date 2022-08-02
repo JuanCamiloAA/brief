@@ -1,15 +1,16 @@
 
-
+body {
+    font-family: 'Nunito', sans-serif;
+}
 .fondo{
-    background-image: url("../img/sidebar.png");
+    background-image: url(/images/sidebar.png);
     /* background: url("../img/sidebar.png"); */
 } 
 body{
     font-family: 'Times New Roman', Times, serif;
-    font-weight: 800;
 }
 .fondogeneral{
-    background-image: url("../img/fondologin.jpg");
+    background-image: url(/images/fondologin.jpg);
     width: 100%;
     height: 100%;
     background-attachment: fixed;
@@ -25,20 +26,4 @@ body{
 }
 .op_foot{
     background-color: rgba(50, 49, 49 ,0.2);
-}
-.select2{
-    width: 100%!important;
-    
-}
-.select2-container--bootstrap-5 .select2-selection{
-    min-height:3.5rem!important;
-}
-.select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
-    padding-top: 10px!important;
-}
-.select2-container .select2-selection--single .select2-selection__rendered{
-    padding-right: 0px!important;
-}
-.select2-container--bootstrap-5 .select2-selection--single{
-    background-position: right 0.75rem center!important;
 }

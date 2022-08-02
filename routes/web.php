@@ -24,5 +24,8 @@ Route::resources([
     'brief' => BriefController::class,
 ]);
 
+Route::get('ChangeState/{id}/{State}',[BriefController::class,'ChangeState'])->name('brief.ChangeState');
+
+
 
 // Route::get('/logout',[loginController::class,'create'])->name('logout');

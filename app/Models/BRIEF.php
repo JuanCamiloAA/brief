@@ -19,12 +19,14 @@ class BRIEF extends Model
         'VigIni',
         'VigFin',
         'VigPag',
+        'VigLiq',
         'ObjGen',
         'ObjEsp',
         'Cond',
         'ForPagVe',
         'ForPagLab',
         'Pres',
+        'State',
     ];
     public $timestamps = false;
 }

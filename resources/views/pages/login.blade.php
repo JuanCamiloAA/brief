@@ -57,7 +57,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-6 py-2 pb-5 d-grid grap-2 text-center">
                                         <a href="{{route('login.create')}}" class="btn btn-primary" >
-                                            Iniciar sesión
+                                            Ingresar
                                         </a>
                                     </div>
                                 </div>

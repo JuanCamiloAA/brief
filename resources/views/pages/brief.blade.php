@@ -24,7 +24,9 @@
                         <th>Solicitante</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
+                        <th>Fecha liquidación</th>
                         <th>Fecha Pago</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -37,10 +39,32 @@
 
                             <td>{{$brief->VigIni}}</td>
                             <td>{{$brief->VigFin}}</td>
-                            <td>{{$brief->VigFin}}</td>
+                            <td>{{$brief->VigLiq}}</td>
+                            <td>{{$brief->VigPag}}</td>
+                            <td>
+                                
+                            @if($brief->State)
+                                <span class="badge rounded-pill bg-secondary">Activo</span>
+                            @else
+                                <span class="badge rounded-pill bg-danger">Inactivo</span>
+                            @endif
+                            </td>
                             <td class="d-flex justify-content-around">
                             <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->
-                            <a href="{{route('brief.show', $brief->Brief)}}"><i class="text-info fas fa-info-circle"></i></a>
+                                <a href="{{route('brief.show', $brief->Brief)}}" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Detalle de Brief">
+                                    <i class="text-info fas fa-info-circle"></i>
+                                </a>
+                            @if($brief->State)
+                                <a href="{{route('brief.ChangeState', ['id' => $brief->Brief, 'State' => $brief->State])}}"
+                                data-bs-toggle="tooltip" data-bs-placement="right" title="Desactivar Brief">
+                                    <i class="fas fa-times-circle text-danger"></i>
+                                </a>
+                            @else
+                                <a href="{{route('brief.ChangeState', ['id' => $brief->Brief, 'State' => $brief->State])}}"
+                                data-bs-toggle="tooltip" data-bs-placement="right" title="Activar Brief">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </a>
+                            @endif
                             </td>
                         </tr>
                     @endforeach
