@@ -185,6 +185,8 @@ class BriefController extends Controller
         $brief->update([
             "Conclucion" => $input['conclucion'],
         ]);
+        
+        alert()->success('BRIEF', 'Conclución Agregada exitosamente.');
         return Redirect()->route('brief.index');
     }
 

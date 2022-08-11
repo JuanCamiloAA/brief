@@ -6,19 +6,12 @@
     <div class="toast align-items-center text-white bg-dark border-0 fixed-bottom p-2 my-2 ml-2" id="alert" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
         <div class="d-flex">
             <div class="toast-body">
-                    <strong><i class="fas fa-info-circle text-info"></i> </strong>Debe seleccionar un articulo e ingresar una meta.
+                    <strong id="icono"><i class="fas fa-info-circle text-info"></i> </strong><span id="mensaje"></span>
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
-    <div class="toast align-items-center text-white bg-dark border-0 fixed-bottom p-2 my-2 ml-2" id="alert1" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
-        <div class="d-flex">
-            <div class="toast-body">
-                    <strong><i class="fas fa-info-circle text-info"></i> </strong>Seleccionar un vendedor.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
+
 
     <div class="row justify-content-center py-4">
         <div class="col-md-10 col-12 op rounded px-4">
@@ -197,8 +190,8 @@
                             </div>
                         </div>
                     </div>
-<!--                     
-                    <div class="col-lg-6">
+                    
+                    <!-- <div class="col-lg-6">
                         <div class="row">
                             <div class="input-group mb-3">
                                 <div class="col-lg-3 col-md-4 col-5">
@@ -350,20 +343,36 @@
                                 </td>
                             </tr>
                         `);
+                            $('#icono').text(``);
+                            $('#icono').append(`<i class="fas fa-check-circle text-success"></i> `);
+                            let mensaje = `Condición ${cont} agregada exitosamente.`;
+                            $('#mensaje').text(mensaje);
+                            $('#alert').toast('show');
                         cont += 1;
                     } else {
-                        $('#alert3').toast('show');
+                        let mensaje = "Debe ingresar un valor en el campo Ganancia.";
+                        $('#mensaje').text(mensaje);
+                        $('#alert').toast('show');
                     }
                 } else {
+                    let mensaje = "Debe ingresar un valor en el campo Meta.";
+                    $('#mensaje').text(mensaje);
                     $('#alert').toast('show');
                 }
             } else {
-                $('#alert1').toast('show');
+                let mensaje = "Debe seleccionar un vendedor.";
+                $('#mensaje').text(mensaje);
+                $('#alert').toast('show');
             }
         }
         function eliminar(id) {
             let fila = $("#tr-"+id);
             fila.remove();
+                $('#icono').text(``);
+                $('#icono').append(`<i class="fas fa-check-circle text-success"></i> `);
+                let mensaje = `Condición ${id} eliminada exitosamente.`;
+                $('#mensaje').text(mensaje);
+                $('#alert').toast('show');
         }
     </script>
 @endsection
