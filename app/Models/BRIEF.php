@@ -26,6 +26,7 @@ class BRIEF extends Model
         'ForPagVe',
         'ForPagLab',
         'Pres',
+        'Conclucion',
         'State',
     ];
     public $timestamps = false;

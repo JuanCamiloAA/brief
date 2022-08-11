@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
         <!-- Or for RTL support -->
+        <link rel="icon" href="{{url('/')}}/img/logoIvanagro.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
         @yield('css')
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -23,7 +24,7 @@
                 background: #053402;
             } 
             .fondogeneral{
-                background-image: url("../img/fondologin.jpg");
+                background-image: url("{{url('')}}/img/fondologin.jpg");
             }
             .fondo-btn:hover{
                 background: #218F18;
@@ -49,13 +50,13 @@
                     <div class="col-6">
                         <div class="row op rounded p-4">
                             <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12 text-center pb-5">
-                                        <h1 class=""><img src="../img/LogoIvanagro.png" alt="" width="250rem"></h1>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 text-center pb-5">
+                                        <h1 class=""><img src="{{url('/')}}/img/logoIvanagro.png" alt="LogoNegro" width="100%"></h1>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-6 py-2 pb-5 d-grid grap-2 text-center">
+                                    <div class="col-md-6 py-2 pb-5 d-grid grap-2 text-center">
                                         <a href="{{route('login.create')}}" class="btn btn-primary" >
                                             Ingresar
                                         </a>

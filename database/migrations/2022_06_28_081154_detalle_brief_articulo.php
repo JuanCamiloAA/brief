@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('detalle_brief', function (Blueprint $table) {
             $table->BigIncrements('id');
+            $table->String('Titulo',50);
             $table->unsignedBigInteger('Brief_id');  
             $table->foreign('Brief_id')->references('Brief')->on('TABLE_BRIEF');
             $table->string('vendedor_id', 50)->nullable();
-            $table->string('articulo_id', 50)->nullable();
-            $table->string('laboratorio_id', 100)->nullable();
             $table->double('Meta',19,6)->nullable();
+            $table->double('Ganancia',19,6)->nullable();
             
         });
     }

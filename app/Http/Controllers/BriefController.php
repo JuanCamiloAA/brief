@@ -12,6 +12,7 @@ use Illuminate\Http\Client;
 use Alert;
 use App\Imports\DatesImport;
 use Maatwebsite\Excel\Excel;
+use Symfony\Component\Console\Input\Input;
 
 class BriefController extends Controller
 {
@@ -71,9 +72,10 @@ class BriefController extends Controller
      */
     public function store(formBrief $request)
     {
+        
         try {
             $input = $request->all();
-            dd($input);
+            // dd($input);
             DB::beginTransaction();
             $breif = BRIEF::create([
                 "Solicitante" => $input["Solicitante"],
@@ -91,19 +93,12 @@ class BriefController extends Controller
                 "State" => 1
             ]);
             foreach ($input["vendedor_id"] as $key => $value) {
-                if (isset($input["articulo_id"][$key])) {
-                    $Vendedor = $input["articulo_id"][$key];
-                    $laboratorio = $input["laboratorio"][$key];
-                }else {
-                    $Vendedor = "General";
-                    $laboratorio = $input["laboratorio_name"];
-                }
                 detalle_breif::create([
+                    "Titulo" => $input["titulo"][$key],
                     "Brief_id" => $breif->Brief,
-                    "vendedor_id" => $value,
-                    "articulo_id" => $Vendedor,
-                    "laboratorio_id" => $laboratorio,
+                    "vendedor_id" => $input['vendedor_id'][$key],
                     "Meta" => $input["Meta"][$key],
+                    "Ganancia" => $input["Ganancia"][$key],
                 ]);
             }
 
@@ -154,7 +149,25 @@ class BriefController extends Controller
     public function edit($id)
     {
         $brief = BRIEF::find($id);
-        return view('pages.EditBrief', compact('brief'));
+        $detalle_brief = detalle_breif::select("TABLE_BRIEF.*", "detalle_brief.*")->join("TABLE_BRIEF", "TABLE_BRIEF.Brief", "=", "detalle_brief.Brief_id")
+            ->where("detalle_brief.Brief_id", $id)
+            ->get();
+
+        session_start();
+
+        $retorno = Http::retry(10, 300)->withToken($_SESSION['B1SESSION'])
+        ->get('https://10.170.20.95:50000/b1s/v1/$crossjoin(Items,BusinessPartners)?$expand=Items($select=ItemCode,ItemName,ForeignName,SupplierCatalogNo),BusinessPartners($select=CardCode,CardName)&$filter=Items/Mainsupplier eq BusinessPartners/CardCode');
+        
+        $retorno = $retorno->json();
+        $articulos = $retorno['value'];
+
+        $employes = Http::retry(20, 300)->withToken($_SESSION['B1SESSION'])
+        ->get('https://10.170.20.95:50000/b1s/v1/SalesPersons?$select=SalesEmployeeCode,SalesEmployeeName');
+
+        $employes = $employes->json();
+        $empleados = $employes['value'];
+
+        return view('pages.EditBrief', compact('brief', 'detalle_brief', 'articulos', 'empleados'));
     }
 
     /**
@@ -168,7 +181,10 @@ class BriefController extends Controller
     {
         $input = $request->all();
         $brief = BRIEF::find($id);
-        $brief->update($input);
+        // dd($brief);
+        $brief->update([
+            "Conclucion" => $input['conclucion'],
+        ]);
         return Redirect()->route('brief.index');
     }
 

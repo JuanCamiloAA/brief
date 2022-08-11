@@ -20,6 +20,7 @@
             <table id="dt" style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
                 <thead>
                     <tr> 
+                        <th>Acciones</th>
                         <th>N° BRIEF</th>
                         <th>Solicitante</th>
                         <th>Fecha Inicio</th>
@@ -27,28 +28,11 @@
                         <th>Fecha liquidación</th>
                         <th>Fecha Pago</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($brief as $brief)
                         <tr>
-                            <td>{{$brief->Brief}}</td>
-                        
-                            <td>{{$brief->Solicitante_name}}</td>
-
-                            <td>{{$brief->VigIni}}</td>
-                            <td>{{$brief->VigFin}}</td>
-                            <td>{{$brief->VigLiq}}</td>
-                            <td>{{$brief->VigPag}}</td>
-                            <td>
-                                
-                            @if($brief->State)
-                                <span class="badge rounded-pill bg-secondary">Activo</span>
-                            @else
-                                <span class="badge rounded-pill bg-danger">Inactivo</span>
-                            @endif
-                            </td>
                             <td class="d-flex justify-content-around">
                             <!-- <a href="{{route('brief.edit', $brief->Brief)}}"><i class="text-warning far fa-edit"></i></a> -->
                                 <a href="{{route('brief.show', $brief->Brief)}}" data-bs-toggle="tooltip" data-bs-placement="right" title="Ver Detalle de Brief">
@@ -60,11 +44,30 @@
                                     <i class="fas fa-times-circle text-danger"></i>
                                 </a>
                             @else
-                                <a href="{{route('brief.ChangeState', ['id' => $brief->Brief, 'State' => $brief->State])}}"
+                                <a href="{{route('brief.edit', $brief->Brief)}}"
                                 data-bs-toggle="tooltip" data-bs-placement="right" title="Activar Brief">
-                                    <i class="fas fa-check-circle text-success"></i>
+                                    <i class="fas fa-comment-alt text-warning"></i>
                                 </a>
                             @endif
+                            
+                            </td>
+
+                            <td>{{$brief->Brief}}</td>
+                        
+                            <td>{{$brief->Solicitante_name}}</td>
+
+                            <td>{{$brief->VigIni}}</td>
+                            <td>{{$brief->VigFin}}</td>
+                            <td>{{$brief->VigLiq}}</td>
+                            <td>{{$brief->VigPag}}</td>
+                           
+                            <td>
+                                
+                                @if($brief->State)
+                                    <span class="badge rounded-pill bg-secondary">Activo</span>
+                                @else
+                                    <span class="badge rounded-pill bg-danger">Inactivo</span>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -76,6 +79,9 @@
 @endsection
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
 <style>
     .dataTables_wrapper{
         color: #212529!important;
@@ -97,15 +103,21 @@
 @section('script')
 	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#dt').DataTable(
+            var table = $('#dt').DataTable(
             {
+                responsive: true,
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
             }
+            
             );
+            new $.fn.dataTable.FixedHeader( table );
         });
     </script>
 @endsection

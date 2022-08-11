@@ -2,15 +2,10 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
-.fondo{
-    background-image: url(/images/sidebar.png);
-    /* background: url("../img/sidebar.png"); */
-} 
 body{
     font-family: 'Times New Roman', Times, serif;
 }
 .fondogeneral{
-    background-image: url(/images/fondologin.jpg);
     width: 100%;
     height: 100%;
     background-attachment: fixed;

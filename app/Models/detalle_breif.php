@@ -13,7 +13,7 @@ class detalle_breif extends Model
 
     protected $primaryKey = 'id';
 
-    public $fillable = ['id', 'Brief_id', 'vendedor_id', 'articulo_id', 'laboratorio_id', 'Meta',]; 
+    public $fillable = ['Titulo', 'Brief_id', 'vendedor_id', 'Meta', 'Ganancia',]; 
     
     public $timestamps = false;
 

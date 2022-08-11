@@ -138,51 +138,75 @@
                 </span>
             </div>
         </div>
-        <div class="row d-flex justify-content-center mb-3">
-                <div class="col-8 col-md-2">
-                    <a href="{{route('brief.index')}}" class="d-grid gap-2">
-                    <button type="button" class="btn btn-outline-dark">Volver</button>
-                    </a>
-                </div>
-            </div>
     </div>
     <div class="col-12 col-md-7 pt-3 pt-md-0">
-        <div class="table-responsive">
-            <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
-                <thead>
-                    <tr> 
-                        <th>Vendedor</th>
-                        <th>Articulo</th>
-                        <th>Laboratorio</th>
-                        <th>Meta</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        @foreach($detalle_brief as $detalle)
-                            <tr>
-                                
-                                @foreach($empleados as $emp)
-                                    @if($emp['SalesEmployeeCode'] == $detalle['vendedor_id'])
-                                        <td>{{$emp['SalesEmployeeName']}}</td>
-                                    @endif
-                                @endforeach
-
-                                <!-- <td>{{$detalle['vendedor_id']}}</td> -->
-                                @if($detalle['articulo_id'] == "General")
-                                    <td>General</td>
-                                @else
-                                    @foreach($articulos as $arti)
-                                        @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
-                                            <td>{{$arti['Items']['ItemName']}}</td>
-                                        @endif
-                                    @endforeach
-                                @endif
-                                <td>{{$detalle['laboratorio_id']}}</td>
-                                <td>&#36;{{number_format($detalle['Meta'])}}</td>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
+                        <thead>
+                            <tr> 
+                                <th>#</th>
+                                <th>Titulo</th>
+                                <th>Vendedor</th>
+                                <th>Meta</th>
+                                <th>Ganancia</th>
                             </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                                @foreach($detalle_brief as $detalle)
+                                    <tr>
+                                        <td>
+                                            {{$detalle['id']}}
+                                        </td>
+
+                                        <td>
+                                            {{$detalle['Titulo']}}
+                                        </td>
+                                        
+                                        @foreach($empleados as $emp)
+                                            @if($emp['SalesEmployeeCode'] == $detalle['vendedor_id'])
+                                                <td>{{$emp['SalesEmployeeName']}}</td>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- <td>{{$detalle['vendedor_id']}}</td> -->
+                                        <!-- @if($detalle['articulo_id'] == "General")
+                                            <td>General</td>
+                                        @else
+                                            @foreach($articulos as $arti)
+                                                @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
+                                                    <td>{{$arti['Items']['ItemName']}}</td>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        <td>{{$detalle['laboratorio_id']}}</td> -->
+
+                                        <td>&#36;{{number_format($detalle['Meta'])}}</td>
+                                        <td>&#36;{{number_format($detalle['Ganancia'])}}</td>
+                                    </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @if(isset($brief->Conclucion))
+            <div class="row mx-3 p-3 op_foot rounded">
+                <div class="col-12 text-center">
+                    <h2 class="coloresCorp">Concluciones.</h2>
+                </div>
+                <div class="col-12">
+                    <strong style="font-size: 25px;">{{$brief->Conclucion}}</strong>
+                </div>
+            </div>
+        @endif
+        <div class="row d-flex justify-content-center my-3">
+            <div class="col-8 col-md-2">
+                <a href="{{route('brief.index')}}" class="d-grid gap-2">
+                <button type="button" class="btn btn-outline-dark">Volver</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

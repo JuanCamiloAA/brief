@@ -172,6 +172,14 @@
                             <input type="file" class="form-control d-flex align-content-center" id="arch_excel" name="arch_excel" style="height: 3.5rem;" accept=".xlsx">
                         </div>
                     </div> -->
+                    
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="titulo" placeholder="name@example.com">
+                            <label for="titulo">Titulo.</label>
+                        </div>
+                    </div>
+
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="input-group mb-3">
@@ -189,7 +197,7 @@
                             </div>
                         </div>
                     </div>
-                    
+<!--                     
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="input-group mb-3">
@@ -208,11 +216,17 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="meta" placeholder="name@example.com">
                             <label for="meta">Meta.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="ganancia" placeholder="name@example.com">
+                            <label for="ganancia">Ganancia.</label>
                         </div>
                     </div>
                     <div class="col-md-6 pb-3 pb-md-0">
@@ -220,16 +234,17 @@
                             <button class="btn btn-dark" style="height: 3.5rem;" onclick="agregar_esp()" type="button"><i class="fas fa-plus-circle text-white"></i>  Agregar</button>
                         </div>
                     </div>
-                    <div class="col-md-12 cont_table mb-3">
+                    <div class="col-md-12 cont_table my-3">
                         
                         <div class="table-responsive">
                             <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
                                 <thead>
                                     <tr> 
+                                        <th>#</th>
+                                        <th>Titulo</th>
                                         <th>Vendedor</th>
-                                        <th>Articulo</th>
-                                        <th>Laboratorio</th>
                                         <th>Meta</th>
+                                        <th>Ganancia</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -292,53 +307,53 @@
     <script>
         
 
+        let cont = 1;
         function agregar_esp() {
             let laboratorio_name = $("#solicitante option:selected").text();
+            let titulo = $('#titulo').val();
             let vendedor_id = $("#slp-name option:selected").val();
-            let articulo_id = $("#cod-articulo option:selected").val();
-            let laboratorio = $("#cod-articulo option:selected").attr("laboratorio_cod");
-            let laboratorio_n = $("#cod-articulo option:selected").attr("laboratorio_name");
-            let meta = $("#meta").val();
             let vendedor_name = $("#slp-name option:selected").text();
-            let articulo_name = $("#cod-articulo option:selected").attr('nombre');
+            let meta = $("#meta").val();
+            let ganancia = $("#ganancia").val();
+
             var formato = new Intl.NumberFormat('es-MX', {
                 style: 'currency',
                 currency: 'MXN',
             });
             if (vendedor_id != "" ) {
                 if (meta != "") {
-                    if (articulo_name != null) {
-                        art = articulo_name;
-                        lab = laboratorio_n;
-                    }else{
-                        art = "General";
-                        lab = laboratorio_name;
+                    if (ganancia != "") {
+                        $("#table_brief_detalle").append(`
+                            <tr id="tr-${cont}">
+                                    <input type="hidden" name="laboratorio_name" value="${laboratorio_name}"/>
+                                    <input type="hidden" name="titulo[]" value="${titulo}" />
+                                    <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
+                                    <input type="hidden" name="Meta[]" value="${meta}"/>
+                                    <input type="hidden" name="Ganancia[]" value="${ganancia}"/>
+                                <td>
+                                    ${cont}
+                                </td>
+                                <td>
+                                    ${titulo}
+                                </td>
+                                <td>
+                                    ${vendedor_name}
+                                </td>
+                                <td>
+                                    ${formato.format(meta)}
+                                </td>
+                                <td>
+                                    ${formato.format(ganancia)}
+                                </td>
+                                <td class="text-center">
+                                    <button  type="button" class="btn btn-danger" onclick="eliminar(${cont})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        `);
+                        cont += 1;
+                    } else {
+                        $('#alert3').toast('show');
                     }
-
-                    $("#table_brief_detalle").append(`
-                        <tr id="tr-${vendedor_id}">
-                                <input type="hidden" name="laboratorio_name" value="${laboratorio_name}"/>
-                                <input type="hidden" name="vendedor_id[]" value="${vendedor_id}" />
-                                <input type="hidden" name="articulo_id[]" value="${articulo_id}"/>
-                                <input type="hidden" name="laboratorio[]" value="${laboratorio}"/>
-                                <input type="hidden" name="Meta[]" value="${meta}"/>
-                            <td>
-                                ${vendedor_name}
-                            </td>
-                            <td>
-                                ${art}
-                            </td>
-                            <td>
-                                ${lab}
-                            </td>
-                            <td>
-                                ${formato.format(meta)}
-                            </td>
-                            <td class="text-center">
-                                <button  type="button" class="btn btn-danger" onclick="eliminar(${vendedor_id})" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar de la lista"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    `);
                 } else {
                     $('#alert').toast('show');
                 }

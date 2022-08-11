@@ -1,142 +1,261 @@
 @extends('welcome')
 
-@section('tittle','Editar BRIEF')
-
+@section('tittle','Detalle BRIEF')
 @section('content')
 
 <div class="row justify-content-center">
-    <div class="col-md-10 col-12 op opacity-80 rounded p-4">
+    <div class="col-md-5 col-12 op_foot rounded">
         <div class="row">
             <div class="col text-center">
-                <h2 class="coloresCorp">Editar Brief.</h2>
+                <h2 class="coloresCorp">Detalle Brief.</h2>
             </div>
         </div>
-        <form action="{{route('brief.update',$brief->Brief)}}" method="post">
-            @csrf
-            @method('put')
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <select class="form-select selector" style="width: 100%; height: 200px" name="Solicitante" id="solicitante" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->Solicitante}}</option>
-                            <option value="Carlos">Carlos</option>
-                            <option value="Maria">Maria</option>
-                            <option value="pepito">pepito</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <select class="form-select selector" name="Laboratorio" id="laboratorio" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->Laboratorio}}</option>
-                            <option value="Quimicos">Quimicos</option>
-                            <option value="vete">vete</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <select class="form-select selector" name="SlpName" id="slp-name" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->SlpName}}</option>
-                            <option value="marta">marta</option>
-                            <option value="pable">pable</option>
-                            <option value="pepito">pepito</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <select class="form-select selector" name="CodArticulo" id="cod-articulo" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->CodArticulo}}</option>
-                            <option value="crema">crema</option>
-                            <option value="pesticida">pesticida</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ItemName" placeholder="Leave a comment here" id="item-name" style="height: 100px">{{$brief->ItemName}}</textarea>
-                        <label for="item-name">Descripción Articulo</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ObjGen" placeholder="Leave a comment here" id="obj-gen" style="height: 100px">{{$brief->ObjGen}}</textarea>
-                        <label for="obj-gen">Objetivo General.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3" name="ObjEsp" placeholder="Leave a comment here" id="obj-esp" style="height: 100px">{{$brief->ObjEsp}}</textarea>
-                        <label for="obj-esp">Objetivos Especificos.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3" name="Cond" placeholder="Leave a comment here" id="cond" style="height: 100px">{{$brief->Cond}}</textarea>
-                        <label for="cond">Condiciones</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="VigIni" id="vig-ini" value="{{$brief->VigIni}}" placeholder="name@example.com">
-                        <label for="vig-ini">Fecha Inicio <b style="color: red;">*</b>.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="VigFin" id="vig-fin" value="{{$brief->VigFin}}" placeholder="name@example.com">
-                        <label for="vig-fin">Fecha Fin <b style="color: red;">*</b>.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="VigPag" id="vig-pag" value="{{$brief->VigPag}}" placeholder="name@example.com">
-                        <label for="vig-pag">Fecha Pago <b style="color: red;">*</b>.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <select class="form-select  mb-3" name="ForPagVe" id="for-pag-ve" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->ForPagVe}}</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Consignación">Consignación</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <select class="form-select  mb-3" name="ForPagLab" id="for-pag-lab" aria-label="Floating label select example">
-                            <option readonly selected>{{$brief->ForPagLab}}</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Consignación">Consignación</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="Pres" id="pres" value="{{$brief->Pres}}" placeholder="name@example.com">
-                        <label for="pres">Presupuesto <b style="color: red;">*</b>.</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="Meta" id="meta" value="{{$brief->Meta}}" placeholder="name@example.com">
-                        <label for="meta">Meta <b style="color: red;">*</b>.</label>
-                    </div>
+        <div class="row">
+            <div class="col-md-6 p-3">
+                <h4><b>Solicitante:</b></h4>
+                <span>
+                    @if(isset($brief->Solicitante))
+                    {{$brief->Solicitante_name}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin solicitante.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha inicial:</b></h4>
+                <span>
+                    @if(isset($brief->VigIni))
+                        {{$brief->VigIni}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de inicio.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha final:</b></h4>
+                <span>
+                    @if(isset($brief->VigFin))
+                        {{$brief->VigFin}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de Fin.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha de liquidación:</b></h4>
+                <span>
+                    @if(isset($brief->VigLiq))
+                        {{$brief->VigLiq}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de liquidación.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Fecha de pago:</b></h4>
+                <span>
+                    @if(isset($brief->VigLiq))
+                        {{$brief->VigPag}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin fecha de pago.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>Presupuesto:</b></h4>
+                <span>
+                    @if(isset($brief->Pres))
+                        &#36;{{number_format($brief->Pres)}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin presupuesto.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>forma de pago al vendedor:</b></h4>
+                <span>
+                    @if(isset($brief->ForPagVe))
+                        {{$brief->ForPagVe}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin forma de pago al vendedor.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-6 p-3">
+                <h4><b>forma de pago del laboratorio:</b></h4>
+                <span>
+                    @if(isset($brief->ForPagLab))
+                        {{$brief->ForPagLab}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin forma de pago del laboratorio.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-12 p-3 text-lg-center">
+                <h4><b>Objetivo General:</b></h4>
+                <span>
+                    @if(isset($brief->ObjGen))
+                        {{$brief->ObjGen}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin objetivo General.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-12 p-3 text-lg-center">
+                <h4><b>Objetivos Especificos:</b></h4>
+                <span>
+                    
+                    @if(isset($brief->ObjEsp))
+                        {{$brief->ObjEsp}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin objetivos especificos.</b>
+                    @endif
+                </span>
+            </div>
+            <div class="col-md-12 p-3 text-lg-center">
+                <h4><b>Condiciones:</b></h4>
+                <span>
+                    @if(isset($brief->Cond))
+                        {{$brief->Cond}}
+                    @else
+                       <b class="text-danger opacity-75"> Sin condiciones.</b>
+                    @endif
+                </span>
+            </div>
+            
+            <div class="col-md-12 p-3">
+                <h4><b>Estado:</b></h4>
+                <span>
+                    @if($brief->State)
+                        <div class="alert alert-success text-center" role="alert">
+                            <b>Activo</b> 
+                        </div>
+                    @else
+                        <div class="alert alert-danger text-center" role="alert">
+                            <b>Inactivo</b> 
+                        </div>
+                    @endif
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-7 pt-3 pt-md-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table style="width: 100%;" class="table table-dark table-striped table-hover nowrap">
+                        <thead>
+                            <tr> 
+                                <th>#</th>
+                                <th>Titulo</th>
+                                <th>Vendedor</th>
+                                <th>Meta</th>
+                                <th>Ganancia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach($detalle_brief as $detalle)
+                                    <tr>
+                                        <td>
+                                            {{$detalle['id']}}
+                                        </td>
+
+                                        <td>
+                                            {{$detalle['Titulo']}}
+                                        </td>
+                                        
+                                        @foreach($empleados as $emp)
+                                            @if($emp['SalesEmployeeCode'] == $detalle['vendedor_id'])
+                                                <td>{{$emp['SalesEmployeeName']}}</td>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- <td>{{$detalle['vendedor_id']}}</td> -->
+                                        <!-- @if($detalle['articulo_id'] == "General")
+                                            <td>General</td>
+                                        @else
+                                            @foreach($articulos as $arti)
+                                                @if($arti['Items']['ItemCode'] == $detalle['articulo_id'])
+                                                    <td>{{$arti['Items']['ItemName']}}</td>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        <td>{{$detalle['laboratorio_id']}}</td> -->
+
+                                        <td>&#36;{{number_format($detalle['Meta'])}}</td>
+                                        <td>&#36;{{number_format($detalle['Ganancia'])}}</td>
+                                    </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="row d-flex justify-content-end">
-                <div class="col-4 d-grid gap-2">
-                    <button type="submit" class="btn btn-dark text-white">Editar</button>
+        </div>
+        @if(isset($brief->Conclucion))
+            <div class="row mx-3 p-3 op_foot rounded">
+                <div class="col-12 text-center">
+                    <h2 class="coloresCorp">Concluciones.</h2>
                 </div>
-                <div class="col-2">
-                    <a href="{{route('brief.index')}}" class="d-grid gap-2">
-                    <button type="button" class="btn btn-outline-dark">Volver</button>
-                    </a>
+                <div class="col-12">
+                    <form action="{{route('brief.update',$brief->Brief)}}" method="post">
+                        @csrf
+                        @method('put')
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Concluciones" id="conclu" name="conclucion" style="height: 100px">{{$brief->Conclucion}}</textarea>
+                                    <label for="floatingTextarea2">Conclución</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row d-flex justify-content-end my-3">
+                            <div class="col-12 col-md-4 pb-3 pb-md-0 d-grid gap-2">
+                                <button type="submit" class="btn btn-dark text-white">Guardar</button>
+                            </div>
+                            <div class="col-md-2 col-12">
+                                <a href="{{route('brief.index')}}" class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline-dark">Volver</button>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        @else 
+            <div class="row mx-3 p-3 op_foot rounded">
+                    <div class="col-12 text-center">
+                        <h2 class="coloresCorp">Concluciones.</h2>
+                    </div>
+                    <div class="col-12">
+                        <form action="{{route('brief.update',$brief->Brief)}}" method="post">
+                            @csrf
+                            @method('put')
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Concluciones" id="conclu" name="conclucion" style="height: 100px"></textarea>
+                                        <label for="floatingTextarea2">Conclución</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row d-flex justify-content-end my-3">
+                                <div class="col-12 col-md-4 pb-3 pb-md-0 d-grid gap-2">
+                                    <button type="submit" class="btn btn-dark text-white">Guardar</button>
+                                </div>
+                                <div class="col-md-2 col-12">
+                                    <a href="{{route('brief.index')}}" class="d-grid gap-2">
+                                    <button type="button" class="btn btn-outline-dark">Volver</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        @endif
     </div>
 </div>
 @endsection
@@ -146,30 +265,5 @@
         color: #0F6004;
         font-weight: 900;
     }
-    .fondo{
-    background-image: url("../img/sidebar.png");
-    /* background: url("../img/sidebar.png"); */
-    } 
-    body{
-        font-family: 'Times New Roman', Times, serif;
-    }
-    .fondogeneral{
-        background-image: url("../img/fondologin.jpg");
-    }
-    .fondo-btn{
-        background:#115100;
-    }
-    .fondo-btn:hover{
-        background: #218F18;
-    }
-    .op{
-        background-color: rgba(252, 252, 252, 0.8);
-    }
 </style>
-@endsection
-
-@section('script')
-<script>
-
-</script>
 @endsection

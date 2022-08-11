@@ -1,7 +1,7 @@
 <nav class="navbar fondo fixed-top">
   <div class="container-fluid d-flex justify-content-between">
     <div class="btn-group">
-        <a href="{{route('brief.index')}}" class=""><img src="../img/Logo.png" alt="Logo" width="100rem" height="50rem"></a>
+        <a href="{{route('brief.index')}}" class=""><img src="{{url('')}}/img/Logo.png" alt="Logo" width="100rem" height="50rem"></a>
     </div>
     <div class="btn-group">
       <!-- <form action="{{route('login.store')}}" method="post">
